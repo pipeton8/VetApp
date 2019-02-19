@@ -8,22 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		B60352232219A1680070583B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60352222219A1680070583B /* AppDelegate.swift */; };
-		B60352252219A1680070583B /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60352242219A1680070583B /* FirstViewController.swift */; };
-		B60352272219A1680070583B /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60352262219A1680070583B /* SecondViewController.swift */; };
+		B60352252219A1680070583B /* PetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60352242219A1680070583B /* PetViewController.swift */; };
+		B60352272219A1680070583B /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60352262219A1680070583B /* NewsViewController.swift */; };
 		B603522A2219A1680070583B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B60352282219A1680070583B /* Main.storyboard */; };
 		B603522C2219A1690070583B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B603522B2219A1690070583B /* Assets.xcassets */; };
 		B603522F2219A1690070583B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B603522D2219A1690070583B /* LaunchScreen.storyboard */; };
+		B60352392219A6880070583B /* VetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60352382219A6880070583B /* VetViewController.swift */; };
+		B6035240221A4A840070583B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B603523F221A4A840070583B /* SettingsViewController.swift */; };
+		B6035243221A603F0070583B /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6035242221A603F0070583B /* Pet.swift */; };
+		B6035245221A61CB0070583B /* Cat.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6035244221A61CB0070583B /* Cat.swift */; };
+		B6035247221A63050070583B /* Dog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6035246221A63050070583B /* Dog.swift */; };
+		B681EFD4221B3D8500661118 /* NewPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B681EFD3221B3D8500661118 /* NewPetViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B603521F2219A1680070583B /* VetApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VetApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B60352222219A1680070583B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B60352242219A1680070583B /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		B60352262219A1680070583B /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		B60352242219A1680070583B /* PetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetViewController.swift; sourceTree = "<group>"; };
+		B60352262219A1680070583B /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		B60352292219A1680070583B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B603522B2219A1690070583B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B603522E2219A1690070583B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B60352302219A1690070583B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B60352382219A6880070583B /* VetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VetViewController.swift; sourceTree = "<group>"; };
+		B603523F221A4A840070583B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		B6035242221A603F0070583B /* Pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
+		B6035244221A61CB0070583B /* Cat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cat.swift; sourceTree = "<group>"; };
+		B6035246221A63050070583B /* Dog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dog.swift; sourceTree = "<group>"; };
+		B681EFD3221B3D8500661118 /* NewPetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPetViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +68,45 @@
 		B60352212219A1680070583B /* VetApp */ = {
 			isa = PBXGroup;
 			children = (
-				B60352222219A1680070583B /* AppDelegate.swift */,
-				B60352242219A1680070583B /* FirstViewController.swift */,
-				B60352262219A1680070583B /* SecondViewController.swift */,
+				B6035241221A602E0070583B /* Model */,
 				B60352282219A1680070583B /* Main.storyboard */,
+				B603523B2219AED20070583B /* ViewControllers */,
+				B603523E2219AF0E0070583B /* Supporting Files */,
 				B603522B2219A1690070583B /* Assets.xcassets */,
+			);
+			path = VetApp;
+			sourceTree = "<group>";
+		};
+		B603523B2219AED20070583B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B60352242219A1680070583B /* PetViewController.swift */,
+				B60352262219A1680070583B /* NewsViewController.swift */,
+				B60352382219A6880070583B /* VetViewController.swift */,
+				B603523F221A4A840070583B /* SettingsViewController.swift */,
+				B681EFD3221B3D8500661118 /* NewPetViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		B603523E2219AF0E0070583B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B60352222219A1680070583B /* AppDelegate.swift */,
 				B603522D2219A1690070583B /* LaunchScreen.storyboard */,
 				B60352302219A1690070583B /* Info.plist */,
 			);
-			path = VetApp;
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B6035241221A602E0070583B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B6035244221A61CB0070583B /* Cat.swift */,
+				B6035246221A63050070583B /* Dog.swift */,
+				B6035242221A603F0070583B /* Pet.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +180,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B60352272219A1680070583B /* SecondViewController.swift in Sources */,
+				B6035240221A4A840070583B /* SettingsViewController.swift in Sources */,
+				B60352272219A1680070583B /* NewsViewController.swift in Sources */,
 				B60352232219A1680070583B /* AppDelegate.swift in Sources */,
-				B60352252219A1680070583B /* FirstViewController.swift in Sources */,
+				B6035243221A603F0070583B /* Pet.swift in Sources */,
+				B681EFD4221B3D8500661118 /* NewPetViewController.swift in Sources */,
+				B6035247221A63050070583B /* Dog.swift in Sources */,
+				B60352392219A6880070583B /* VetViewController.swift in Sources */,
+				B60352252219A1680070583B /* PetViewController.swift in Sources */,
+				B6035245221A61CB0070583B /* Cat.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
