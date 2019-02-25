@@ -8,9 +8,11 @@
 
 import Foundation
 
-enum Species : String {
+enum Species : String, CaseIterable {
     case Cat = "Cat"
     case Dog = "Dog"
+    
+//    static let allValues = [Cat, Dog]
 }
 
 class Pet {
@@ -20,7 +22,7 @@ class Pet {
     var chipNumber : Int // String maybe?
     var race : String
     
-    init(name : String, species : Species, race : String, dateOfBirth : Int,  chipNumber : Int) {
+    init(name : String, species : Species, race : String, dateOfBirth : Int, chipNumber : Int) {
         self.name = name
         self.species = species
         self.race = race

@@ -25,6 +25,7 @@
 		B62C4F5622237F1500B98C82 /* AddPetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B62C4F5422237F1500B98C82 /* AddPetCell.xib */; };
 		B62C4F582223950500B98C82 /* EditPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F572223950500B98C82 /* EditPetController.swift */; };
 		B62C4F5A22239F9E00B98C82 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B62C4F5922239F9E00B98C82 /* GoogleService-Info.plist */; };
+		B62C4F5C222444B200B98C82 /* ExtraInspectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F5B222444B200B98C82 /* ExtraInspectorButton.swift */; };
 		B681EFD4221B3D8500661118 /* AddPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B681EFD3221B3D8500661118 /* AddPetController.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		B62C4F5422237F1500B98C82 /* AddPetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPetCell.xib; sourceTree = "<group>"; };
 		B62C4F572223950500B98C82 /* EditPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPetController.swift; sourceTree = "<group>"; };
 		B62C4F5922239F9E00B98C82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B62C4F5B222444B200B98C82 /* ExtraInspectorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraInspectorButton.swift; sourceTree = "<group>"; };
 		B681EFD3221B3D8500661118 /* AddPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetController.swift; sourceTree = "<group>"; };
 		C3EF37773E16A7B4A8B41595 /* Pods_VetApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VetApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4AFCDCE617D39C73118DCD3 /* Pods-VetApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VetApp.release.xcconfig"; path = "Target Support Files/Pods-VetApp/Pods-VetApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				B603522D2219A1690070583B /* LaunchScreen.storyboard */,
 				B60352302219A1690070583B /* Info.plist */,
 				B62C4F5922239F9E00B98C82 /* GoogleService-Info.plist */,
+				B62C4F5B222444B200B98C82 /* ExtraInspectorButton.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				B6035243221A603F0070583B /* Pet.swift in Sources */,
 				B681EFD4221B3D8500661118 /* AddPetController.swift in Sources */,
 				B6035247221A63050070583B /* Dog.swift in Sources */,
+				B62C4F5C222444B200B98C82 /* ExtraInspectorButton.swift in Sources */,
 				B60352392219A6880070583B /* VetController.swift in Sources */,
 				B60352252219A1680070583B /* PetController.swift in Sources */,
 				B62C4F5522237F1500B98C82 /* AddPetCell.swift in Sources */,

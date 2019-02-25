@@ -23,17 +23,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="119.5" height="119.5"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Kira" translatesAutoresizingMaskIntoConstraints="NO" id="KTF-ex-Lil">
-                                <rect key="frame" x="11" y="11" width="98" height="98"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="98" id="2eI-aD-T8a"/>
-                                    <constraint firstAttribute="height" constant="98" id="CFh-ol-QaS"/>
-                                </constraints>
+                                <rect key="frame" x="10" y="10" width="99.5" height="99.5"/>
                             </imageView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="KTF-ex-Lil" firstAttribute="top" secondItem="xnT-k8-zlo" secondAttribute="top" constant="10" id="Bsh-dP-8I5"/>
+                            <constraint firstItem="KTF-ex-Lil" firstAttribute="leading" secondItem="xnT-k8-zlo" secondAttribute="leading" constant="10" id="N4f-ZH-9Kr"/>
                             <constraint firstAttribute="width" secondItem="xnT-k8-zlo" secondAttribute="height" multiplier="1:1" id="S9C-M2-dYH"/>
-                            <constraint firstItem="KTF-ex-Lil" firstAttribute="centerY" secondItem="xnT-k8-zlo" secondAttribute="centerY" id="jJV-sg-lLI"/>
-                            <constraint firstItem="KTF-ex-Lil" firstAttribute="centerX" secondItem="xnT-k8-zlo" secondAttribute="centerX" id="thg-zg-R2w"/>
+                            <constraint firstAttribute="bottom" secondItem="KTF-ex-Lil" secondAttribute="bottom" constant="10" id="VWD-pG-bHw"/>
+                            <constraint firstAttribute="trailing" secondItem="KTF-ex-Lil" secondAttribute="trailing" constant="10" id="Vwp-zD-GXg"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JN3-Ip-vjb" userLabel="Name Container">

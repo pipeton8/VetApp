@@ -6,6 +6,8 @@
 //  Copyright © 2019 Felipe Del Canto. All rights reserved.
 //
 
+// TODO: Link Database and internal storage
+
 import UIKit
 import Firebase
 import SVProgressHUD
@@ -18,8 +20,10 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     let ADDPET_CELL_ID = "addPetCell" // the identifier set in the XIB file
     let ADDPET_CELL_XIB = "AddPetCell" // the name of the XIB file
     let PET_DATABASE_ID = "Pets"
-    let ESTIMATED_ROW_HEIGHT : CGFloat = 120.0
+    let PET_ROW_HEIGHT : CGFloat = 90.0
+    let ADDNEWPET_ROW_HEIGHT : CGFloat = 60.0
     var petArray : [Pet] = [Pet]()
+    var numberOfPets : Int = 0
 
     // Segue Consts and Variables
     let ADDPET_SEGUE_ID = "goToAddPet"
@@ -37,24 +41,19 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         ConformToProtocols()
         RetrievePets(showHUD: true)
-        ConfigureTableView()
+        ConfigureCells()
         
         petTableView.addSubview(self.refreshControl)
-//        petArray.append(Pet(name: "Kira", species: .Cat, race : "DLH", dateOfBirth: 25, chipNumber: 1))
     }
     
     fileprivate func ConformToProtocols() {
         petTableView.delegate = self
         petTableView.dataSource = self
-        
     }
 
-    fileprivate func ConfigureTableView() {
+    fileprivate func ConfigureCells() {
         petTableView.register(UINib(nibName: ADDPET_CELL_XIB, bundle : nil), forCellReuseIdentifier: ADDPET_CELL_ID)
         petTableView.register(UINib(nibName: PET_CELL_XIB, bundle : nil), forCellReuseIdentifier: PET_CELL_ID)
-        petTableView.rowHeight = ESTIMATED_ROW_HEIGHT
-//        petTableView.rowHeight = UITableView.automaticDimension
-//        petTableView.estimatedRowHeight = ESTIMATED_ROW_HEIGHT
     }
     
     //////////////////////////////////////////////////////////////
@@ -65,13 +64,11 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let numberOfPets : Int = petArray.count
-        
         if indexPath.row < numberOfPets {
             let cell = tableView.dequeueReusableCell(withIdentifier: PET_CELL_ID, for: indexPath) as! PetCell
             let petToShow : Pet = petArray[indexPath.row]
             cell.petName.text = petToShow.name
-            cell.petRace.text = petToShow.race
+            cell.petRace.text = "Race: " + petToShow.race
             cell.petSpecies.text = petToShow.species.rawValue
             return cell
         } else {
@@ -80,16 +77,24 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let numberOfPets : Int = petArray.count
-        
         if indexPath.row < numberOfPets {
             petToEdit = petArray[indexPath.row]
             performSegue(withIdentifier: EDITPET_SEGUE_ID, sender: self)
         } else {
             performSegue(withIdentifier: ADDPET_SEGUE_ID, sender: self)
         }
+        
+        petTableView.deselectRow(at: indexPath, animated: false)
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row < numberOfPets { return PET_ROW_HEIGHT }
+        else { return ADDNEWPET_ROW_HEIGHT}
+    }
+    
+    //////////////////////////////////////////////////////////////
+    
+    // MARK: PullToRefresh
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:
@@ -124,12 +129,11 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                     newPetArray.append(Pet(dictionary: petData))
                 }
                 self.petArray = newPetArray
+                self.numberOfPets = newPetArray.count
                 self.petTableView.reloadData()
                 SVProgressHUD.dismiss()
             }
         }
-        
-        
     }
     
     fileprivate func UploadPet(_ petToAdd : Pet) {
@@ -151,9 +155,8 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             let addPetVC = segue.destination as! AddPetViewController
             addPetVC.delegate = self
         }
-        
-        
     }
+    
     //////////////////////////////////////////////////////////////
     
     // MARK: AddPet and EditPet methods
