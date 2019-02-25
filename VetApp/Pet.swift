@@ -8,9 +8,9 @@
 
 import Foundation
 
-enum Species {
-    case Cat
-    case Dog
+enum Species : String {
+    case Cat = "Cat"
+    case Dog = "Dog"
 }
 
 class Pet {
@@ -18,10 +18,12 @@ class Pet {
     var species : Species
     var dateOfBirth : Int // Special format?
     var chipNumber : Int // String maybe?
+    var race : String
     
-    init(name : String, species : Species, dateOfBirth : Int, chipNumber : Int) {
+    init(name : String, species : Species, race : String, dateOfBirth : Int,  chipNumber : Int) {
         self.name = name
         self.species = species
+        self.race = race
         self.dateOfBirth = dateOfBirth
         self.chipNumber = chipNumber
     }

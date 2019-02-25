@@ -103,6 +103,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
+                                            <action selector="backPressed:" destination="lQO-kc-O5s" eventType="touchUpInside" id="rUb-wX-J5a"/>
                                             <segue destination="9j6-ge-w7w" kind="unwind" unwindAction="backToPetViewController:" id="aG8-vi-FXU"/>
                                         </connections>
                                     </button>
@@ -171,50 +172,31 @@
                                     <constraint firstAttribute="bottom" secondItem="wRQ-cX-o7F" secondAttribute="bottom" constant="8" id="wUr-Mn-lqV"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8aK-Cf-hYG" userLabel="New Pet">
-                                <rect key="frame" x="15" y="265" width="384" height="60"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iff-3E-LgI">
-                                        <rect key="frame" x="0.0" y="0.0" width="384" height="60"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
-                                        <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Add new pet" image="Add Button">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="lQO-kc-O5s" kind="presentation" identifier="goToNewPet" id="czc-bu-8jn"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="F3e-n1-34e">
+                                <rect key="frame" x="0.0" y="101" width="414" height="712"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="iff-3E-LgI" secondAttribute="bottom" id="7jQ-Hi-AwI"/>
-                                    <constraint firstItem="iff-3E-LgI" firstAttribute="leading" secondItem="8aK-Cf-hYG" secondAttribute="leading" id="JjH-hX-Jwv"/>
-                                    <constraint firstAttribute="trailing" secondItem="iff-3E-LgI" secondAttribute="trailing" id="Krr-GH-ujX"/>
-                                    <constraint firstItem="iff-3E-LgI" firstAttribute="top" secondItem="8aK-Cf-hYG" secondAttribute="top" id="XHI-Xv-xb7"/>
-                                    <constraint firstAttribute="height" constant="60" id="rkY-QO-hQ0"/>
-                                </constraints>
-                            </view>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="46u-1e-yRr" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" id="18z-kF-dkc"/>
                             <constraint firstAttribute="trailing" secondItem="46u-1e-yRr" secondAttribute="trailing" id="AOB-Sc-yiK"/>
-                            <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="8aK-Cf-hYG" secondAttribute="trailing" constant="15" id="GMo-0m-a9t"/>
                             <constraint firstItem="46u-1e-yRr" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="UBz-Uf-YLe"/>
-                            <constraint firstItem="8aK-Cf-hYG" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="15" id="w5M-my-Qgy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="Pets Tab Icon" selectedImage="Pets Tab Icon" id="acW-dT-cKf" userLabel="Pet Icon"/>
                     <navigationItem key="navigationItem" id="67g-qY-uwp"/>
                     <connections>
+                        <outlet property="petTableView" destination="F3e-n1-34e" id="Luv-n3-Xan"/>
                         <segue destination="pMC-c5-CBc" kind="presentation" identifier="goToEditPet" id="spv-Wd-X9P"/>
+                        <segue destination="lQO-kc-O5s" kind="presentation" identifier="goToAddPet" id="1rJ-XY-Z54"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-186" y="-761"/>
+            <point key="canvasLocation" x="-186.95652173913044" y="-761.38392857142856"/>
         </scene>
         <!--Vet-->
         <scene sceneID="fI8-KS-ek9">
@@ -406,7 +388,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Add Button" width="30" height="30"/>
         <image name="News Tab Icon" width="22.5" height="22.5"/>
         <image name="Pets Tab Icon" width="22.5" height="22.5"/>
         <image name="Settings Tab Icon" width="22.5" height="22.5"/>

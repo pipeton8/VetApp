@@ -15,4 +15,8 @@ class NewPetViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    @IBAction func backPressed(_ sender: Any) {
+        dismiss(animated: true)
+    }
 }

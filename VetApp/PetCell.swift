@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+class PetCell: UITableViewCell {
 
     @IBOutlet weak var petPicture: UIImageView!
     @IBOutlet weak var petName: UILabel!

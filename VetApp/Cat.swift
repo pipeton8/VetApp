@@ -14,15 +14,15 @@ enum CatRace {
     case DSH
 }
 
-class Cat : Pet {
-    var race : CatRace = .none
-    
-    init(name : String, species : Species, race : CatRace, dateOfBirth : Int, chipNumber : Int) {
-        super.init(name: name, species: species, dateOfBirth: dateOfBirth, chipNumber: chipNumber)
-        self.race = race
-    }
-    
-    func UpdateRace(newRace : CatRace) {
-        race = newRace
-    }
+class Cat : Pet {  // TODO: rethink data modeling
+//    var race : CatRace = .none
+//
+//    init(name : String, species : Species, race : CatRace, dateOfBirth : Int, chipNumber : Int) {
+//        super.init(name: name, species: species, dateOfBirth: dateOfBirth, chipNumber: chipNumber)
+//        self.race = race
+//    }
+//
+//    func UpdateRace(newRace : CatRace) {
+//        race = newRace
+//    }
 }
