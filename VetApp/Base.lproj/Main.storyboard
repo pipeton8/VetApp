@@ -79,10 +79,10 @@
             </objects>
             <point key="canvasLocation" x="-562" y="-1460"/>
         </scene>
-        <!--New Pet View Controller-->
+        <!--Add Pet View Controller-->
         <scene sceneID="iqN-Dq-HED">
             <objects>
-                <viewController id="lQO-kc-O5s" customClass="NewPetViewController" customModule="VetApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lQO-kc-O5s" customClass="AddPetViewController" customModule="VetApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0c3-Wc-rLu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -122,8 +122,8 @@
                                     <constraint firstItem="G4T-RS-Flw" firstAttribute="centerX" secondItem="7Z1-xg-dpE" secondAttribute="centerX" id="yjY-by-Pud"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Pet View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5p-fC-pTl">
-                                <rect key="frame" x="89.666666666666686" y="424" width="235" height="48"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Pet View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5p-fC-pTl">
+                                <rect key="frame" x="93.666666666666686" y="424" width="227" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

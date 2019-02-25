@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Firebase
+import SVProgressHUD
 
-class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddPetDelegate {
+
     // Table View Consts and Variables
     let PET_CELL_ID = "petCell"
     let PET_CELL_XIB = "PetCell" // the name of the XIB file
@@ -34,14 +36,17 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         super.viewDidLoad()
         
         ConformToProtocols()
+        RetrievePets(showHUD: true)
         ConfigureTableView()
         
-        petArray.append(Pet(name: "Kira", species: .Cat, race : "DLH", dateOfBirth: 25, chipNumber: 1))
+        petTableView.addSubview(self.refreshControl)
+//        petArray.append(Pet(name: "Kira", species: .Cat, race : "DLH", dateOfBirth: 25, chipNumber: 1))
     }
     
     fileprivate func ConformToProtocols() {
         petTableView.delegate = self
         petTableView.dataSource = self
+        
     }
 
     fileprivate func ConfigureTableView() {
@@ -54,7 +59,7 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     //////////////////////////////////////////////////////////////
     
-    // MARK: TableViewMethods
+    // MARK: TableView Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return petArray.count + 1 // the extra element is the addPet button
     }
@@ -85,6 +90,56 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+            #selector(self.handleRefresh(_:)), for: UIControl.Event.valueChanged)
+        refreshControl.tintColor = UIColor.black
+        
+        return refreshControl
+    }()
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        RetrievePets()
+        refreshControl.endRefreshing()
+        self.petTableView.reloadData()
+    }
+    
+    //////////////////////////////////////////////////////////////
+    
+    // MARK: Networking
+    fileprivate func RetrievePets(showHUD : Bool = false) {
+        if showHUD { SVProgressHUD.show() }
+        let petDB = Firestore.firestore().collection(PET_DATABASE_ID)
+        var newPetArray = [Pet]()
+        
+        petDB.getDocuments {
+            (snapshot, error) in
+            if let error = error {
+                print("There was an error getting the documents : \(error)")
+                SVProgressHUD.dismiss()
+            } else {
+                for document in snapshot!.documents {
+                    let petData = document.data()
+                    newPetArray.append(Pet(dictionary: petData))
+                }
+                self.petArray = newPetArray
+                self.petTableView.reloadData()
+                SVProgressHUD.dismiss()
+            }
+        }
+        
+        
+    }
+    
+    fileprivate func UploadPet(_ petToAdd : Pet) {
+        let petData = petToAdd.PrepareToUpload()
+        SVProgressHUD.show()
+        let petDB = Firestore.firestore().collection(PET_DATABASE_ID)
+        petDB.addDocument(data: petData)
+        SVProgressHUD.dismiss()
+    }
+    
     //////////////////////////////////////////////////////////////
     
     // MARK: Segue methods
@@ -92,8 +147,24 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         if segue.identifier == EDITPET_SEGUE_ID {
             let editPetVC = segue.destination as! EditPetViewController
             editPetVC.petToEdit = petToEdit
+        } else if segue.identifier == ADDPET_SEGUE_ID {
+            let addPetVC = segue.destination as! AddPetViewController
+            addPetVC.delegate = self
         }
+        
+        
     }
+    //////////////////////////////////////////////////////////////
+    
+    // MARK: AddPet and EditPet methods
+    func PetAdded(newPet: Pet) {
+        petArray.append(newPet)
+        UploadPet(newPet)
+        petTableView.reloadData()
+    }
+    
+    
+
 
 }
 

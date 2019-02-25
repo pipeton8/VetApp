@@ -25,7 +25,7 @@
 		B62C4F5622237F1500B98C82 /* AddPetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B62C4F5422237F1500B98C82 /* AddPetCell.xib */; };
 		B62C4F582223950500B98C82 /* EditPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F572223950500B98C82 /* EditPetController.swift */; };
 		B62C4F5A22239F9E00B98C82 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B62C4F5922239F9E00B98C82 /* GoogleService-Info.plist */; };
-		B681EFD4221B3D8500661118 /* NewPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B681EFD3221B3D8500661118 /* NewPetController.swift */; };
+		B681EFD4221B3D8500661118 /* AddPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B681EFD3221B3D8500661118 /* AddPetController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,7 +49,7 @@
 		B62C4F5422237F1500B98C82 /* AddPetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPetCell.xib; sourceTree = "<group>"; };
 		B62C4F572223950500B98C82 /* EditPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPetController.swift; sourceTree = "<group>"; };
 		B62C4F5922239F9E00B98C82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		B681EFD3221B3D8500661118 /* NewPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPetController.swift; sourceTree = "<group>"; };
+		B681EFD3221B3D8500661118 /* AddPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetController.swift; sourceTree = "<group>"; };
 		C3EF37773E16A7B4A8B41595 /* Pods_VetApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VetApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4AFCDCE617D39C73118DCD3 /* Pods-VetApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VetApp.release.xcconfig"; path = "Target Support Files/Pods-VetApp/Pods-VetApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,7 +101,7 @@
 			children = (
 				B60352242219A1680070583B /* PetController.swift */,
 				B62C4F572223950500B98C82 /* EditPetController.swift */,
-				B681EFD3221B3D8500661118 /* NewPetController.swift */,
+				B681EFD3221B3D8500661118 /* AddPetController.swift */,
 				B60352262219A1680070583B /* NewsController.swift */,
 				B60352382219A6880070583B /* VetController.swift */,
 				B603523F221A4A840070583B /* SettingsController.swift */,
@@ -256,10 +256,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-VetApp/Pods-VetApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -267,10 +271,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -314,7 +322,7 @@
 				B60352272219A1680070583B /* NewsController.swift in Sources */,
 				B60352232219A1680070583B /* AppDelegate.swift in Sources */,
 				B6035243221A603F0070583B /* Pet.swift in Sources */,
-				B681EFD4221B3D8500661118 /* NewPetController.swift in Sources */,
+				B681EFD4221B3D8500661118 /* AddPetController.swift in Sources */,
 				B6035247221A63050070583B /* Dog.swift in Sources */,
 				B60352392219A6880070583B /* VetController.swift in Sources */,
 				B60352252219A1680070583B /* PetController.swift in Sources */,

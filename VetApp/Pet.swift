@@ -28,4 +28,23 @@ class Pet {
         self.chipNumber = chipNumber
     }
     
+    init(dictionary : [String : Any]) {
+        self.name = dictionary["name"] as! String
+        self.species = Species.init(rawValue: dictionary["species"] as! String)!
+        self.race = dictionary["race"] as! String
+        self.dateOfBirth = dictionary["dateOfBirth"] as! Int
+        self.chipNumber = dictionary["chipNumber"] as! Int
+    }
+    
+    func PrepareToUpload() -> [String : Any] {
+        let dict : [String : Any] = [
+            "name"        : name,
+            "species"     : species.rawValue,
+            "race"        : race,
+            "dateOfBirth" : dateOfBirth,
+            "chipNumber"  : chipNumber
+            ]
+        
+        return dict
+    }
 }
