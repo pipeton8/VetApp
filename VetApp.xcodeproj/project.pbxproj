@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0BECC66270ADCBB608D75C67 /* Pods_VetApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3EF37773E16A7B4A8B41595 /* Pods_VetApp.framework */; };
 		B60352232219A1680070583B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60352222219A1680070583B /* AppDelegate.swift */; };
 		B60352252219A1680070583B /* PetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60352242219A1680070583B /* PetController.swift */; };
 		B60352272219A1680070583B /* NewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60352262219A1680070583B /* NewsController.swift */; };
@@ -23,10 +24,12 @@
 		B62C4F5522237F1500B98C82 /* AddPetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F5322237F1500B98C82 /* AddPetCell.swift */; };
 		B62C4F5622237F1500B98C82 /* AddPetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B62C4F5422237F1500B98C82 /* AddPetCell.xib */; };
 		B62C4F582223950500B98C82 /* EditPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F572223950500B98C82 /* EditPetController.swift */; };
+		B62C4F5A22239F9E00B98C82 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B62C4F5922239F9E00B98C82 /* GoogleService-Info.plist */; };
 		B681EFD4221B3D8500661118 /* NewPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B681EFD3221B3D8500661118 /* NewPetController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		509AB7DDBF5D9F8D89D8B02F /* Pods-VetApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VetApp.debug.xcconfig"; path = "Target Support Files/Pods-VetApp/Pods-VetApp.debug.xcconfig"; sourceTree = "<group>"; };
 		B603521F2219A1680070583B /* VetApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VetApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B60352222219A1680070583B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B60352242219A1680070583B /* PetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetController.swift; sourceTree = "<group>"; };
@@ -45,7 +48,10 @@
 		B62C4F5322237F1500B98C82 /* AddPetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetCell.swift; sourceTree = "<group>"; };
 		B62C4F5422237F1500B98C82 /* AddPetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPetCell.xib; sourceTree = "<group>"; };
 		B62C4F572223950500B98C82 /* EditPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPetController.swift; sourceTree = "<group>"; };
+		B62C4F5922239F9E00B98C82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B681EFD3221B3D8500661118 /* NewPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPetController.swift; sourceTree = "<group>"; };
+		C3EF37773E16A7B4A8B41595 /* Pods_VetApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VetApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4AFCDCE617D39C73118DCD3 /* Pods-VetApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VetApp.release.xcconfig"; path = "Target Support Files/Pods-VetApp/Pods-VetApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BECC66270ADCBB608D75C67 /* Pods_VetApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +71,8 @@
 			children = (
 				B60352212219A1680070583B /* VetApp */,
 				B60352202219A1680070583B /* Products */,
+				C1FF455A77817EE245388CB8 /* Pods */,
+				F7AFACA2385808FD3F0DB19E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,6 +115,7 @@
 				B60352222219A1680070583B /* AppDelegate.swift */,
 				B603522D2219A1690070583B /* LaunchScreen.storyboard */,
 				B60352302219A1690070583B /* Info.plist */,
+				B62C4F5922239F9E00B98C82 /* GoogleService-Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -148,6 +158,23 @@
 			name = "Pet Cell";
 			sourceTree = "<group>";
 		};
+		C1FF455A77817EE245388CB8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				509AB7DDBF5D9F8D89D8B02F /* Pods-VetApp.debug.xcconfig */,
+				F4AFCDCE617D39C73118DCD3 /* Pods-VetApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F7AFACA2385808FD3F0DB19E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C3EF37773E16A7B4A8B41595 /* Pods_VetApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -155,9 +182,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B60352332219A1690070583B /* Build configuration list for PBXNativeTarget "VetApp" */;
 			buildPhases = (
+				AE6C4BDDBA55BB86A8BAE2B8 /* [CP] Check Pods Manifest.lock */,
 				B603521B2219A1680070583B /* Sources */,
 				B603521C2219A1680070583B /* Frameworks */,
 				B603521D2219A1680070583B /* Resources */,
+				76A6A569810CE6FC504466EE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -211,10 +240,68 @@
 				B62C4F5122237EEE00B98C82 /* PetCell.xib in Resources */,
 				B603522C2219A1690070583B /* Assets.xcassets in Resources */,
 				B603522A2219A1680070583B /* Main.storyboard in Resources */,
+				B62C4F5A22239F9E00B98C82 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		76A6A569810CE6FC504466EE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VetApp/Pods-VetApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VetApp/Pods-VetApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AE6C4BDDBA55BB86A8BAE2B8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VetApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B603521B2219A1680070583B /* Sources */ = {
@@ -376,11 +463,13 @@
 		};
 		B60352342219A1690070583B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 509AB7DDBF5D9F8D89D8B02F /* Pods-VetApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2D86RYF628;
 				INFOPLIST_FILE = VetApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -394,11 +483,13 @@
 		};
 		B60352352219A1690070583B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4AFCDCE617D39C73118DCD3 /* Pods-VetApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2D86RYF628;
 				INFOPLIST_FILE = VetApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
