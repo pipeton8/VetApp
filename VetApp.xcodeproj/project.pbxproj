@@ -17,8 +17,7 @@
 		B60352392219A6880070583B /* VetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60352382219A6880070583B /* VetController.swift */; };
 		B6035240221A4A840070583B /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B603523F221A4A840070583B /* SettingsController.swift */; };
 		B6035243221A603F0070583B /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6035242221A603F0070583B /* Pet.swift */; };
-		B6035245221A61CB0070583B /* Cat.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6035244221A61CB0070583B /* Cat.swift */; };
-		B6035247221A63050070583B /* Dog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6035246221A63050070583B /* Dog.swift */; };
+		B6035245221A61CB0070583B /* SpeciesRaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6035244221A61CB0070583B /* SpeciesRaces.swift */; };
 		B62C4F5022237EEE00B98C82 /* PetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F4E22237EEE00B98C82 /* PetCell.swift */; };
 		B62C4F5122237EEE00B98C82 /* PetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B62C4F4F22237EEE00B98C82 /* PetCell.xib */; };
 		B62C4F5522237F1500B98C82 /* AddPetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F5322237F1500B98C82 /* AddPetCell.swift */; };
@@ -26,7 +25,8 @@
 		B62C4F582223950500B98C82 /* EditPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F572223950500B98C82 /* EditPetController.swift */; };
 		B62C4F5A22239F9E00B98C82 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B62C4F5922239F9E00B98C82 /* GoogleService-Info.plist */; };
 		B62C4F5C222444B200B98C82 /* ExtraInspectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F5B222444B200B98C82 /* ExtraInspectorButton.swift */; };
-		B681EFD4221B3D8500661118 /* AddPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B681EFD3221B3D8500661118 /* AddPetController.swift */; };
+		B62C4F5E2224DAF100B98C82 /* CameraHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F5D2224DAF100B98C82 /* CameraHandler.swift */; };
+		B681EFD4221B3D8500661118 /* ConfigPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B681EFD3221B3D8500661118 /* ConfigPetController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,8 +42,7 @@
 		B60352382219A6880070583B /* VetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VetController.swift; sourceTree = "<group>"; };
 		B603523F221A4A840070583B /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		B6035242221A603F0070583B /* Pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
-		B6035244221A61CB0070583B /* Cat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cat.swift; sourceTree = "<group>"; };
-		B6035246221A63050070583B /* Dog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dog.swift; sourceTree = "<group>"; };
+		B6035244221A61CB0070583B /* SpeciesRaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesRaces.swift; sourceTree = "<group>"; };
 		B62C4F4E22237EEE00B98C82 /* PetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetCell.swift; sourceTree = "<group>"; };
 		B62C4F4F22237EEE00B98C82 /* PetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PetCell.xib; sourceTree = "<group>"; };
 		B62C4F5322237F1500B98C82 /* AddPetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetCell.swift; sourceTree = "<group>"; };
@@ -51,7 +50,8 @@
 		B62C4F572223950500B98C82 /* EditPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPetController.swift; sourceTree = "<group>"; };
 		B62C4F5922239F9E00B98C82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B62C4F5B222444B200B98C82 /* ExtraInspectorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraInspectorButton.swift; sourceTree = "<group>"; };
-		B681EFD3221B3D8500661118 /* AddPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetController.swift; sourceTree = "<group>"; };
+		B62C4F5D2224DAF100B98C82 /* CameraHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHandler.swift; sourceTree = "<group>"; };
+		B681EFD3221B3D8500661118 /* ConfigPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPetController.swift; sourceTree = "<group>"; };
 		C3EF37773E16A7B4A8B41595 /* Pods_VetApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VetApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4AFCDCE617D39C73118DCD3 /* Pods-VetApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VetApp.release.xcconfig"; path = "Target Support Files/Pods-VetApp/Pods-VetApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,7 +103,7 @@
 			children = (
 				B60352242219A1680070583B /* PetController.swift */,
 				B62C4F572223950500B98C82 /* EditPetController.swift */,
-				B681EFD3221B3D8500661118 /* AddPetController.swift */,
+				B681EFD3221B3D8500661118 /* ConfigPetController.swift */,
 				B60352262219A1680070583B /* NewsController.swift */,
 				B60352382219A6880070583B /* VetController.swift */,
 				B603523F221A4A840070583B /* SettingsController.swift */,
@@ -119,6 +119,7 @@
 				B60352302219A1690070583B /* Info.plist */,
 				B62C4F5922239F9E00B98C82 /* GoogleService-Info.plist */,
 				B62C4F5B222444B200B98C82 /* ExtraInspectorButton.swift */,
+				B62C4F5D2224DAF100B98C82 /* CameraHandler.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -126,8 +127,7 @@
 		B6035241221A602E0070583B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B6035244221A61CB0070583B /* Cat.swift */,
-				B6035246221A63050070583B /* Dog.swift */,
+				B6035244221A61CB0070583B /* SpeciesRaces.swift */,
 				B6035242221A603F0070583B /* Pet.swift */,
 			);
 			name = Model;
@@ -325,13 +325,13 @@
 				B60352272219A1680070583B /* NewsController.swift in Sources */,
 				B60352232219A1680070583B /* AppDelegate.swift in Sources */,
 				B6035243221A603F0070583B /* Pet.swift in Sources */,
-				B681EFD4221B3D8500661118 /* AddPetController.swift in Sources */,
-				B6035247221A63050070583B /* Dog.swift in Sources */,
+				B681EFD4221B3D8500661118 /* ConfigPetController.swift in Sources */,
+				B62C4F5E2224DAF100B98C82 /* CameraHandler.swift in Sources */,
 				B62C4F5C222444B200B98C82 /* ExtraInspectorButton.swift in Sources */,
 				B60352392219A6880070583B /* VetController.swift in Sources */,
 				B60352252219A1680070583B /* PetController.swift in Sources */,
 				B62C4F5522237F1500B98C82 /* AddPetCell.swift in Sources */,
-				B6035245221A61CB0070583B /* Cat.swift in Sources */,
+				B6035245221A61CB0070583B /* SpeciesRaces.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

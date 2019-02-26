@@ -8,45 +8,33 @@
 
 import Foundation
 
-enum Species : String, CaseIterable {
-    case Cat = "Cat"
-    case Dog = "Dog"
-    
-//    static let allValues = [Cat, Dog]
-}
-
 class Pet {
-    var name : String
-    var species : Species
-    var dateOfBirth : Int // Special format?
-    var chipNumber : Int // String maybe?
-    var race : String
+    var name : String = ""
+    var species : Species = Species.none
+    var race : String = ""
+    var dateOfBirth : Int = 0
+    var chipNumber : Int = -1
+    var imagePath : String = ""
+    var ID : String = ""
     
-    init(name : String, species : Species, race : String, dateOfBirth : Int, chipNumber : Int) {
-        self.name = name
-        self.species = species
-        self.race = race
-        self.dateOfBirth = dateOfBirth
-        self.chipNumber = chipNumber
-    }
-    
-    init(dictionary : [String : Any]) {
-        self.name = dictionary["name"] as! String
-        self.species = Species.init(rawValue: dictionary["species"] as! String)!
-        self.race = dictionary["race"] as! String
-        self.dateOfBirth = dictionary["dateOfBirth"] as! Int
-        self.chipNumber = dictionary["chipNumber"] as! Int
+    init(dictionary : [String : Any], id : String?) {
+        if let name = dictionary["name"] as? String { self.name = name }
+        if let speciesStr = dictionary["species"] as? String, let species = Species(rawValue: speciesStr) { self.species = species }
+        if let race = dictionary["race"] as? String { self.race = race }
+        if let dateOfBirth = dictionary["dateOfBirt"] as? Int { self.dateOfBirth = dateOfBirth }
+        if let chipNumber = dictionary["chipNumber"] as? Int { self.chipNumber = chipNumber}
+        if let imagePath = dictionary["imagePath"] as? String { self.imagePath = imagePath }
+        if let ID = id { self.ID = ID }
     }
     
     func PrepareToUpload() -> [String : Any] {
-        let dict : [String : Any] = [
-            "name"        : name,
-            "species"     : species.rawValue,
-            "race"        : race,
-            "dateOfBirth" : dateOfBirth,
-            "chipNumber"  : chipNumber
+        return [
+                    "name"        : name,
+                    "species"     : species.rawValue,
+                    "race"        : race,
+                    "dateOfBirth" : dateOfBirth,
+                    "chipNumber"  : chipNumber,
+                    "imagePath"   : imagePath
             ]
-        
-        return dict
     }
 }

@@ -12,7 +12,7 @@ import UIKit
 import Firebase
 import SVProgressHUD
 
-class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddPetDelegate {
+class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ConfigPetDelegate {
 
     // Table View Consts and Variables
     let PET_CELL_ID = "petCell"
@@ -28,7 +28,8 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     // Segue Consts and Variables
     let ADDPET_SEGUE_ID = "goToAddPet"
     let EDITPET_SEGUE_ID = "goToEditPet"
-    var petToEdit : Pet? = nil
+    var petToEdit : Pet?
+    var petToEditImage : UIImage?
     
     // Outlets
     @IBOutlet weak var petTableView: UITableView!
@@ -59,6 +60,19 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     //////////////////////////////////////////////////////////////
     
     // MARK: TableView Methods
+    func loadImage(from pet: Pet) -> UIImage? {
+        if pet.imagePath == "" { return nil }
+        
+        let imageUrl : URL = URL(fileURLWithPath: pet.imagePath)
+        
+        if FileManager.default.fileExists(atPath: pet.imagePath),
+            let imageData: Data = try? Data(contentsOf: imageUrl),
+            let image: UIImage = UIImage(data: imageData, scale: UIScreen.main.scale) {
+            return image
+        }
+        return nil
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return petArray.count + 1 // the extra element is the addPet button
     }
@@ -67,6 +81,8 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         if indexPath.row < numberOfPets {
             let cell = tableView.dequeueReusableCell(withIdentifier: PET_CELL_ID, for: indexPath) as! PetCell
             let petToShow : Pet = petArray[indexPath.row]
+            let petImage : UIImage? = loadImage(from: petToShow)
+            if petImage != nil { cell.petPicture.image = petImage! }
             cell.petName.text = petToShow.name
             cell.petRace.text = "Race: " + petToShow.race
             cell.petSpecies.text = petToShow.species.rawValue
@@ -79,6 +95,7 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row < numberOfPets {
             petToEdit = petArray[indexPath.row]
+            petToEditImage = (tableView.cellForRow(at: indexPath) as! PetCell).petPicture.image
             performSegue(withIdentifier: EDITPET_SEGUE_ID, sender: self)
         } else {
             performSegue(withIdentifier: ADDPET_SEGUE_ID, sender: self)
@@ -126,7 +143,7 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             } else {
                 for document in snapshot!.documents {
                     let petData = document.data()
-                    newPetArray.append(Pet(dictionary: petData))
+                    newPetArray.append(Pet(dictionary: petData, id: document.reference.documentID))
                 }
                 self.petArray = newPetArray
                 self.numberOfPets = newPetArray.count
@@ -138,9 +155,11 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     fileprivate func UploadPet(_ petToAdd : Pet) {
         let petData = petToAdd.PrepareToUpload()
+        
         SVProgressHUD.show()
         let petDB = Firestore.firestore().collection(PET_DATABASE_ID)
-        petDB.addDocument(data: petData)
+        let petDocReference = petDB.document(petToAdd.ID)
+        petDocReference.setData(petData)
         SVProgressHUD.dismiss()
     }
     
@@ -148,12 +167,13 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     // MARK: Segue methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let configPetVC = segue.destination as! ConfigPetViewController
+        configPetVC.delegate = self
+
         if segue.identifier == EDITPET_SEGUE_ID {
-            let editPetVC = segue.destination as! EditPetViewController
-            editPetVC.petToEdit = petToEdit
-        } else if segue.identifier == ADDPET_SEGUE_ID {
-            let addPetVC = segue.destination as! AddPetViewController
-            addPetVC.delegate = self
+            configPetVC.petToEdit = petToEdit
+            configPetVC.petImage = petToEditImage
+            configPetVC.editMode = true
         }
     }
     
@@ -162,7 +182,15 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     // MARK: AddPet and EditPet methods
     func PetAdded(newPet: Pet) {
         petArray.append(newPet)
+        numberOfPets += 1
         UploadPet(newPet)
+        petTableView.reloadData()
+    }
+    
+    func PetConfigured(pet: Pet) {
+        let petIndex = petArray.firstIndex(where: {$0.ID == pet.ID})!
+        petArray[petIndex] = pet
+        UploadPet(pet)
         petTableView.reloadData()
     }
     
