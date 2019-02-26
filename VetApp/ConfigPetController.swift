@@ -6,6 +6,8 @@
 //  Copyright © 2019 Felipe Del Canto. All rights reserved.
 //
 
+// TODO: Review Image inputs and storage
+
 import UIKit
 
 protocol ConfigPetDelegate {
@@ -17,15 +19,26 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     // Consts and Var
     var delegate : ConfigPetDelegate?
+    
+    // Edit Mode Consts and variables
+    let DEFAULT_CHIP_NUMBER : Int = -1
+    let DEFAULT_DATE_OF_BIRTH : Int = 0
+
     var editMode : Bool = false
     var petToEdit : Pet!    // this pet is passed by the delegate who called the edit
     var petImage : UIImage! // this image is passed by the delegate who called the edit
     var petConfigured : Pet!
-    
+
     // Picture consts and variables
     var imageToStore : UIImage?
     var imagePath : String = ""
     
+    // Finish button consts and variables
+    let FINISH_BUTTON_EDIT_TEXT : String = "Done"
+    let FINISH_BUTTON_ADD_TEXT : String = "Add"
+    let FINISH_BUTTON_HIDE_ALPHA : CGFloat = 0.5
+    let FINISH_BUTTON_SHOW_ALPHA : CGFloat = 1
+
     // SpeciesPickerView consts and variables
     let SPECIES_PICKER_HIDE_HEIGHT : CGFloat = -260.0
     let SPECIES_PICKER_SHOW_HEIGHT : CGFloat = 0
@@ -40,6 +53,7 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     let DATE_PICKER_SHOW_CONSTANT : CGFloat = 0.0
     let DATE_PICKER_ANIM_TIME : TimeInterval = 0.25
     let DATEOFBIRTH_DATE_FORMAT : DateFormatter.Style = .long
+    
     var dateOfBirthFormatter = DateFormatter()
 
     // TextFields consts and variables
@@ -69,50 +83,66 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         chipNumberTextField.delegate = self
     }
     
-    fileprivate func ConfigureDateOfBirthPicker() {
+    fileprivate func InitializeDateOfBirth() {
         dateOfBirthPicker.maximumDate = Date()
         dateOfBirthFormatter.dateStyle = DATEOFBIRTH_DATE_FORMAT
+        dateOfBirthPicker.date = Date()
+        dateOfBirthLabel.text! = dateOfBirthFormatter.string(from: Date())
     }
     
-    fileprivate func ConfigureRaceButton() {
-        if raceButton.title(for: .normal)! != DEFAULT_RACE_PICKER_TEXT {
-            raceButton.isEnabled = true
-        }
-    }
-    
-    fileprivate func ConfigureEditMode() {
-        finishButton.setTitle("Done", for: .normal)
-        
+    fileprivate func SetPictureAndName() {
         pictureView.image = petImage
         imageToStore = petImage
         nameTextField.text! = petToEdit!.name
-        
+    }
+    
+    fileprivate func SetSpeciesAndRaceButtons() {
         speciesButton.setTitle(petToEdit!.species.rawValue, for: .normal)
         raceButton.setTitle(petToEdit!.race, for: .normal)
         raceButton.isEnabled = true
-
+    }
+    
+    fileprivate func SetSpeciesAndRacePicker() {
         let speciesRowSelected = Species.allCases.firstIndex(of: petToEdit!.species)! + 1
         let raceRowSelected = Species.GetRacesIn(petToEdit!.species).firstIndex(of: petToEdit!.race)!
         speciesPicker.selectRow(speciesRowSelected, inComponent: SPECIES_PICKERVIEW_COMPONENT, animated: false)
         speciesPicker.reloadComponent(RACE_PICKERVIEW_COMPONENT)
         speciesPicker.selectRow(raceRowSelected, inComponent: RACE_PICKERVIEW_COMPONENT, animated: false)
-
+    }
+    
+    fileprivate func SetDateOfBirth() {
+        if petToEdit.dateOfBirth != DEFAULT_DATE_OF_BIRTH {
+            let dateOfBirth = Date(timeIntervalSinceReferenceDate: TimeInterval(petToEdit.dateOfBirth))
+            dateOfBirthPicker.date = dateOfBirth
+            dateOfBirthLabel.text! = dateOfBirthFormatter.string(from: dateOfBirth)
+        }
+    }
+    
+    fileprivate func SetChipNumber() {
+        if petToEdit.chipNumber != DEFAULT_CHIP_NUMBER {
+            chipNumberTextField.text! = String(petToEdit.chipNumber)
+        } else {
+            chipNumberTextField.text! = ""
+        }
+    }
+    
+    fileprivate func ConfigureEditMode() {
+        finishButton.setTitle(FINISH_BUTTON_EDIT_TEXT, for: .normal)
         
-        let dateOfBirth = Date(timeIntervalSinceReferenceDate: TimeInterval(petToEdit!.dateOfBirth))
-        dateOfBirthPicker.date = dateOfBirth
-        dateOfBirthLabel.text! = dateOfBirthFormatter.string(from: dateOfBirth)
-        
-        chipNumberTextField.text! = String(petToEdit!.chipNumber)
+        SetPictureAndName()
+        SetSpeciesAndRaceButtons()
+        SetSpeciesAndRacePicker()
+        SetDateOfBirth()
+        SetChipNumber()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ConfigureRaceButton()
-        ConfigureDateOfBirthPicker()
         ConformToProtocols()
+        InitializeDateOfBirth()
         if editMode { ConfigureEditMode() }
-
+        UpdateFinishButton()
     }
 
     //////////////////////////////////////////////////////////////
@@ -136,6 +166,7 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         if textField === nameTextField {
             speciesButton.sendActions(for: .touchUpInside)
         }
+        UpdateFinishButton()
         return true
     }
     
@@ -218,6 +249,7 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             titleToSet = RacePickerTitle(pickerView, for : row)
             raceButton.setTitle(titleToSet, for: .normal)
         }
+        UpdateFinishButton()
     }
     
     @IBAction func speciesRacePressed(_ sender: Any) {
@@ -266,22 +298,26 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
 
     func SaveImage() {
         let imageUrl: URL = URL(fileURLWithPath: imagePath)
-        do {
-            try imageToStore!.pngData()?.write(to: imageUrl)
-        } catch {
-            print("Unexpected error: \(error)")
+        if let image = imageToStore {
+            try? image.pngData()?.write(to: imageUrl)
         }
     }
     
     func CreatePet() -> Pet {
         let dateOfBirth : Date = dateOfBirthFormatter.date(from: dateOfBirthLabel.text!)!
+        var raceName = ""
+        if raceButton.titleLabel!.text! == DEFAULT_RACE_PICKER_TEXT {
+            raceName = "Unknown"
+        } else {
+            raceName = raceButton.titleLabel!.text!
+        }
         
         let petDict : [String : Any] = [
-            "name"        : nameTextField.text!,
-            "species"     : speciesButton.titleLabel!.text!,
-            "race"        : raceButton.titleLabel!.text!,
+            "name"        : nameTextField.text ?? "",
+            "species"     : speciesButton.titleLabel!.text ?? Species.none,
+            "race"        : raceName,
             "dateOfBirth" : Int(dateOfBirth.timeIntervalSinceReferenceDate),
-            "chipNumber"  : Int(chipNumberTextField.text!)!,
+            "chipNumber"  : Int(chipNumberTextField.text ?? "-1") ?? -1,
             "imagePath"   : imagePath ]
         
         var id = ""
@@ -336,8 +372,21 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
     }
     
-    func CheckIfFinishIsAvailable() {
-        
+    func CanFinish() -> Bool {
+        var canFinish = true
+        canFinish = canFinish && nameTextField.text! != ""
+        canFinish = canFinish && speciesButton.title(for: .normal) != DEFAULT_SPECIES_PICKER_TEXT
+        canFinish = canFinish && raceButton.title(for: .normal) != DEFAULT_RACE_PICKER_TEXT
+        return canFinish
     }
-
+    
+    fileprivate func UpdateFinishButton() {
+        if CanFinish() {
+            finishButton.isEnabled = true
+            finishButton.alpha = FINISH_BUTTON_SHOW_ALPHA
+        } else {
+            finishButton.isEnabled = false
+            finishButton.alpha = FINISH_BUTTON_HIDE_ALPHA
+        }
+    }
 }
