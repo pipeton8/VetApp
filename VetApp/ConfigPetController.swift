@@ -36,42 +36,45 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     // Finish button consts and variables
     let FINISH_BUTTON_EDIT_TEXT : String = "Done"
     let FINISH_BUTTON_ADD_TEXT : String = "Add"
-    let FINISH_BUTTON_HIDE_ALPHA : CGFloat = 0.5
-    let FINISH_BUTTON_SHOW_ALPHA : CGFloat = 1
+    let FINISH_BUTTON_DISABLED_ALPHA : CGFloat = 0.5
+    let FINISH_BUTTON_ENABLED_ALPHA : CGFloat = 1
 
     // SpeciesPickerView consts and variables
-    let SPECIES_PICKER_HIDE_HEIGHT : CGFloat = -260.0
-    let SPECIES_PICKER_SHOW_HEIGHT : CGFloat = 0
-    let SPECIES_PICKER_ANIM_TIME : TimeInterval = 0.25
+    let SPECIESRACE_PICKER_HIDE_HEIGHT : CGFloat = -216.0
+    let SPECIESRACE_PICKER_SHOW_HEIGHT : CGFloat = 0
+    let SPECIESRACE_PICKER_ANIM_TIME : TimeInterval = 0.25
     let DEFAULT_SPECIES_PICKER_TEXT : String =  "Select..."
     let DEFAULT_RACE_PICKER_TEXT : String = "Select species..."
-    let SPECIES_PICKERVIEW_COMPONENT : Int = 0
-    let RACE_PICKERVIEW_COMPONENT : Int = 1
-    
+    let RACE_BUTTON_DISABLED_ALPHA : CGFloat = 0.5
+    let RACE_BUTTON_ENABLED_ALPHA : CGFloat = 1
+
     // DatePicker consts and variables
     let DATE_PICKER_HIDE_CONSTANT : CGFloat = -216.0
     let DATE_PICKER_SHOW_CONSTANT : CGFloat = 0.0
-    let DATE_PICKER_ANIM_TIME : TimeInterval = 0.25
+    let DATE_PICKER_ANIM_TIME : TimeInterval = 0.3
     let DATEOFBIRTH_DATE_FORMAT : DateFormatter.Style = .long
-    
-    var dateOfBirthFormatter = DateFormatter()
 
-    // TextFields consts and variables
-    let KEYBOARD_ANIM_TIME : TimeInterval = 0.23
+    var dateOfBirthFormatter = DateFormatter()
     
+    // Rows consts
+    let THIRD_ROW_CONSTRAINT_PICKER_SHOW : CGFloat = 216.0
+    let THIRD_ROW_CONSTRAINT_PICKER_HIDE : CGFloat = 0.0
+
     // Outlets
     @IBOutlet weak var finishButton: UIButton!
     @IBOutlet weak var pictureView: UIImageView!
-    @IBOutlet weak var dateofBirthHideConstraint: NSLayoutConstraint!
+    @IBOutlet weak var dateOfBirthHideConstraint: NSLayoutConstraint!
     @IBOutlet weak var dateOfBirthPicker: UIDatePicker!
     @IBOutlet weak var dateOfBirthLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var speciesPickerConstraint: NSLayoutConstraint!
+    @IBOutlet weak var speciesPickerHideConstraint: NSLayoutConstraint!
     @IBOutlet weak var speciesPicker: UIPickerView!
-    @IBOutlet weak var speciesPickerToolbar: UIToolbar!
     @IBOutlet weak var speciesButton: UIButton!
+    @IBOutlet weak var racePickerHideConstraint: NSLayoutConstraint!
+    @IBOutlet weak var racePicker: UIPickerView!
     @IBOutlet weak var raceButton: UIButton!
     @IBOutlet weak var chipNumberTextField: UITextField!
+    @IBOutlet weak var thirdRowTopConstraint: NSLayoutConstraint!
     
     //////////////////////////////////////////////////////////////
     
@@ -79,6 +82,8 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     fileprivate func ConformToProtocols() {
         speciesPicker.delegate = self
         speciesPicker.dataSource = self
+        racePicker.delegate = self
+        racePicker.dataSource = self
         nameTextField.delegate = self
         chipNumberTextField.delegate = self
     }
@@ -105,9 +110,9 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     fileprivate func SetSpeciesAndRacePicker() {
         let speciesRowSelected = Species.allCases.firstIndex(of: petToEdit!.species)! + 1
         let raceRowSelected = Species.GetRacesIn(petToEdit!.species).firstIndex(of: petToEdit!.race)!
-        speciesPicker.selectRow(speciesRowSelected, inComponent: SPECIES_PICKERVIEW_COMPONENT, animated: false)
-        speciesPicker.reloadComponent(RACE_PICKERVIEW_COMPONENT)
-        speciesPicker.selectRow(raceRowSelected, inComponent: RACE_PICKERVIEW_COMPONENT, animated: false)
+        speciesPicker.selectRow(speciesRowSelected, inComponent: 0, animated: false)
+        racePicker.reloadComponent(0)
+        racePicker.selectRow(raceRowSelected, inComponent: 0, animated: false)
     }
     
     fileprivate func SetDateOfBirth() {
@@ -142,6 +147,7 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         ConformToProtocols()
         InitializeDateOfBirth()
         if editMode { ConfigureEditMode() }
+        else { UpdateRaceButton(enabled: false) }
         UpdateFinishButton()
     }
 
@@ -172,26 +178,35 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         HideEverythingExcept(this: textField)
-        UIView.animate(withDuration: KEYBOARD_ANIM_TIME) { self.view.layoutIfNeeded() }
     }
     
     //////////////////////////////////////////////////////////////
     
     // MARK: PickerView-related methods and actions
-    fileprivate func ShowPickerView() {
-        speciesPickerConstraint.constant = SPECIES_PICKER_SHOW_HEIGHT
-        UIView.animate(withDuration: SPECIES_PICKER_ANIM_TIME) {
+    fileprivate func AnimatePickerView(_ pickerView : UIPickerView, hide : Bool) {
+        var pickerConstant : CGFloat = 0.0
+        var thirdRowConstant : CGFloat = 0.0
+        
+        if hide == true {
+            pickerConstant = SPECIESRACE_PICKER_HIDE_HEIGHT
+            thirdRowConstant = THIRD_ROW_CONSTRAINT_PICKER_HIDE
+        } else {
+            pickerConstant = SPECIESRACE_PICKER_SHOW_HEIGHT
+            thirdRowConstant = THIRD_ROW_CONSTRAINT_PICKER_SHOW
+        }
+        
+        if pickerView == speciesPicker {
+            speciesPickerHideConstraint.constant = pickerConstant
+        } else if pickerView == racePicker {
+            racePickerHideConstraint.constant = pickerConstant
+        }
+        thirdRowTopConstraint.constant = thirdRowConstant
+        
+        UIView.animate(withDuration: SPECIESRACE_PICKER_ANIM_TIME) {
             self.view.layoutIfNeeded()
         }
     }
     
-    fileprivate func HidePickerView(animated : Bool) {
-        speciesPickerConstraint.constant = SPECIES_PICKER_HIDE_HEIGHT
-        UIView.animate(withDuration: SPECIES_PICKER_ANIM_TIME) {
-            self.view.layoutIfNeeded()
-        }
-    }
-
     fileprivate func SpeciesPickerTitle(for row: Int) -> String {
         if row == 0 {
             return DEFAULT_SPECIES_PICKER_TEXT
@@ -200,22 +215,22 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
     }
     
-    fileprivate func RacePickerTitle(_ pickerView: UIPickerView, for row: Int) -> String {
-        let rowInFirstComponent = pickerView.selectedRow(inComponent: SPECIES_PICKERVIEW_COMPONENT)
-        if rowInFirstComponent == 0 { return DEFAULT_RACE_PICKER_TEXT }
-        let speciesSelected = Species.allCases[rowInFirstComponent-1]
+    fileprivate func RacePickerTitle(for row: Int) -> String {
+        let rowInSpeciesPicker = speciesPicker.selectedRow(inComponent: 0)
+        if rowInSpeciesPicker == 0 { return DEFAULT_RACE_PICKER_TEXT }
+        let speciesSelected = Species.allCases[rowInSpeciesPicker-1]
         return Species.GetRacesIn(speciesSelected)[row]
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2 // Species and Race
+        return 1 // Species and Race only have 1 component
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if component == SPECIES_PICKERVIEW_COMPONENT {
+        if pickerView == speciesPicker {
             return Species.allCases.count + 1
-        } else {
-            let rowSelectedInSpecies = pickerView.selectedRow(inComponent: SPECIES_PICKERVIEW_COMPONENT)
+        } else { // if pickerView == racePicker {
+            let rowSelectedInSpecies = speciesPicker.selectedRow(inComponent: 0)
             if rowSelectedInSpecies == 0 {
                 return 1
             } else {
@@ -227,26 +242,23 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if component == SPECIES_PICKERVIEW_COMPONENT {
+        if pickerView == speciesPicker {
             return SpeciesPickerTitle(for : row)
-        } else {
-            return RacePickerTitle(pickerView, for : row)
+        } else { // if pickerView == racePicker {
+            return RacePickerTitle(for : row)
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         var titleToSet = ""
-        if component == SPECIES_PICKERVIEW_COMPONENT {
+        if pickerView == speciesPicker {
             titleToSet = SpeciesPickerTitle(for : row)
-            if titleToSet != DEFAULT_SPECIES_PICKER_TEXT { raceButton.isEnabled = true }
-            else {
-                raceButton.isEnabled = false
-                raceButton.setTitle(DEFAULT_RACE_PICKER_TEXT, for: .normal)
-            }
+            if titleToSet != DEFAULT_SPECIES_PICKER_TEXT { UpdateRaceButton(enabled: true) }
+            else { UpdateRaceButton(enabled: false) }
             speciesButton.setTitle(titleToSet, for: .normal)
-            pickerView.reloadComponent(RACE_PICKERVIEW_COMPONENT)
-        } else {
-            titleToSet = RacePickerTitle(pickerView, for : row)
+            racePicker.reloadAllComponents()
+        } else if pickerView == racePicker {
+            titleToSet = RacePickerTitle(for : row)
             raceButton.setTitle(titleToSet, for: .normal)
         }
         UpdateFinishButton()
@@ -254,24 +266,29 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     @IBAction func speciesRacePressed(_ sender: Any) {
         HideEverythingExcept(this: speciesPicker)
-        ShowPickerView()
+        let shouldHide : Bool = speciesPickerHideConstraint.constant == SPECIESRACE_PICKER_SHOW_HEIGHT
+        AnimatePickerView(speciesPicker, hide: shouldHide)
     }
-
-    @IBAction func speciesDonePressed(_ sender: Any) {
-        HidePickerView(animated: true)
+    
+    @IBAction func raceButtonPressed(_ sender: Any) {
+        HideEverythingExcept(this: racePicker)
+        let shouldHide : Bool = racePickerHideConstraint.constant == SPECIESRACE_PICKER_SHOW_HEIGHT
+        AnimatePickerView(racePicker, hide: shouldHide)
     }
+    
 
     //////////////////////////////////////////////////////////////
     
     // MARK: Date Picker methods
     func DateOfBirthPicker(hide : Bool) {
         if hide == true {
-            dateofBirthHideConstraint.constant = DATE_PICKER_HIDE_CONSTANT
+            dateOfBirthHideConstraint.constant = DATE_PICKER_HIDE_CONSTANT
             dateOfBirthLabel.textColor = UIColor.black
         } else {
-            dateofBirthHideConstraint.constant = DATE_PICKER_SHOW_CONSTANT
+            dateOfBirthHideConstraint.constant = DATE_PICKER_SHOW_CONSTANT
             dateOfBirthLabel.textColor = UIColor.red
         }
+        
         UIView.animate(withDuration: DATE_PICKER_ANIM_TIME) {
             self.view.layoutIfNeeded()
         }
@@ -279,7 +296,7 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     @IBAction func dateOfBirthPressed(_ sender: Any) {
         HideEverythingExcept(this: dateOfBirthPicker)
-        let shouldHide : Bool = dateofBirthHideConstraint.constant == DATE_PICKER_SHOW_CONSTANT
+        let shouldHide : Bool = dateOfBirthHideConstraint.constant == DATE_PICKER_SHOW_CONSTANT
         if shouldHide { DateOfBirthPicker(hide: true) }
         else { DateOfBirthPicker(hide: false) }
     }
@@ -348,28 +365,11 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     // MARK: Other Methods
     func HideEverythingExcept(this object : Any?) {
-        if object as? UITextField == nameTextField {
-            HidePickerView(animated: true)
-            DateOfBirthPicker(hide: true)
-            chipNumberTextField.resignFirstResponder()
-        } else if object as? UIPickerView == speciesPicker {
-            nameTextField.resignFirstResponder()
-            DateOfBirthPicker(hide: true)
-            chipNumberTextField.resignFirstResponder()
-        } else if object as? UIDatePicker == dateOfBirthPicker {
-            nameTextField.resignFirstResponder()
-            HidePickerView(animated: true)
-            chipNumberTextField.resignFirstResponder()
-        } else if object as? UITextField == chipNumberTextField {
-            nameTextField.resignFirstResponder()
-            HidePickerView(animated: true)
-            DateOfBirthPicker(hide: true)
-        } else {
-            nameTextField.resignFirstResponder()
-            HidePickerView(animated: true)
-            DateOfBirthPicker(hide: true)
-            chipNumberTextField.resignFirstResponder()
-        }
+        if object as? UITextField != nameTextField { nameTextField.resignFirstResponder() }
+        if object as? UIPickerView != speciesPicker { AnimatePickerView(speciesPicker, hide: true) }
+        if object as? UIPickerView != racePicker { AnimatePickerView(racePicker, hide: true) }
+        if object as? UIDatePicker != dateOfBirthPicker { DateOfBirthPicker(hide: true) }
+        if object as? UITextField != chipNumberTextField { chipNumberTextField.resignFirstResponder() }
     }
     
     func CanFinish() -> Bool {
@@ -383,10 +383,21 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     fileprivate func UpdateFinishButton() {
         if CanFinish() {
             finishButton.isEnabled = true
-            finishButton.alpha = FINISH_BUTTON_SHOW_ALPHA
+            finishButton.alpha = FINISH_BUTTON_ENABLED_ALPHA
         } else {
             finishButton.isEnabled = false
-            finishButton.alpha = FINISH_BUTTON_HIDE_ALPHA
+            finishButton.alpha = FINISH_BUTTON_DISABLED_ALPHA
+        }
+    }
+    
+    fileprivate func UpdateRaceButton(enabled : Bool) {
+        if enabled {
+            raceButton.isEnabled = true
+            raceButton.alpha = RACE_BUTTON_ENABLED_ALPHA
+        } else {
+            raceButton.setTitle(DEFAULT_RACE_PICKER_TEXT, for: .normal)
+            raceButton.isEnabled = false
+            raceButton.alpha = RACE_BUTTON_DISABLED_ALPHA
         }
     }
 }

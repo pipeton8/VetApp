@@ -25,6 +25,8 @@
 		B62C4F5A22239F9E00B98C82 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B62C4F5922239F9E00B98C82 /* GoogleService-Info.plist */; };
 		B62C4F5C222444B200B98C82 /* ExtraInspectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F5B222444B200B98C82 /* ExtraInspectorButton.swift */; };
 		B62C4F5E2224DAF100B98C82 /* CameraHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F5D2224DAF100B98C82 /* CameraHandler.swift */; };
+		B62C4F622225EA1A00B98C82 /* WelcomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F612225EA1A00B98C82 /* WelcomeScreenController.swift */; };
+		B62C4F642225EA4E00B98C82 /* AuthenticationScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F632225EA4E00B98C82 /* AuthenticationScreenController.swift */; };
 		B681EFD4221B3D8500661118 /* ConfigPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B681EFD3221B3D8500661118 /* ConfigPetController.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +51,8 @@
 		B62C4F5922239F9E00B98C82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B62C4F5B222444B200B98C82 /* ExtraInspectorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraInspectorButton.swift; sourceTree = "<group>"; };
 		B62C4F5D2224DAF100B98C82 /* CameraHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHandler.swift; sourceTree = "<group>"; };
+		B62C4F612225EA1A00B98C82 /* WelcomeScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenController.swift; sourceTree = "<group>"; };
+		B62C4F632225EA4E00B98C82 /* AuthenticationScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationScreenController.swift; sourceTree = "<group>"; };
 		B681EFD3221B3D8500661118 /* ConfigPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPetController.swift; sourceTree = "<group>"; };
 		C3EF37773E16A7B4A8B41595 /* Pods_VetApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VetApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4AFCDCE617D39C73118DCD3 /* Pods-VetApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VetApp.release.xcconfig"; path = "Target Support Files/Pods-VetApp/Pods-VetApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -99,11 +103,13 @@
 		B603523B2219AED20070583B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B62C4F612225EA1A00B98C82 /* WelcomeScreenController.swift */,
 				B60352242219A1680070583B /* PetController.swift */,
 				B681EFD3221B3D8500661118 /* ConfigPetController.swift */,
 				B60352262219A1680070583B /* NewsController.swift */,
 				B60352382219A6880070583B /* VetController.swift */,
 				B603523F221A4A840070583B /* SettingsController.swift */,
+				B62C4F632225EA4E00B98C82 /* AuthenticationScreenController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -321,7 +327,9 @@
 				B60352272219A1680070583B /* NewsController.swift in Sources */,
 				B60352232219A1680070583B /* AppDelegate.swift in Sources */,
 				B6035243221A603F0070583B /* Pet.swift in Sources */,
+				B62C4F622225EA1A00B98C82 /* WelcomeScreenController.swift in Sources */,
 				B681EFD4221B3D8500661118 /* ConfigPetController.swift in Sources */,
+				B62C4F642225EA4E00B98C82 /* AuthenticationScreenController.swift in Sources */,
 				B62C4F5E2224DAF100B98C82 /* CameraHandler.swift in Sources */,
 				B62C4F5C222444B200B98C82 /* ExtraInspectorButton.swift in Sources */,
 				B60352392219A6880070583B /* VetController.swift in Sources */,
