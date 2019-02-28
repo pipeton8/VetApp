@@ -208,7 +208,7 @@
                                         <rect key="frame" x="207" y="0.0" width="192" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i1t-IY-voO" userLabel="Race Button">
-                                                <rect key="frame" x="61.666666666666686" y="10" width="130.33333333333334" height="30"/>
+                                                <rect key="frame" x="62" y="10" width="130" height="30"/>
                                                 <color key="backgroundColor" white="0.69999999999999996" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="9ED-CE-X5f"/>
@@ -234,7 +234,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Race:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpC-h2-rUf" userLabel="Race:">
-                                                <rect key="frame" x="10" y="0.0" width="41.666666666666664" height="50"/>
+                                                <rect key="frame" x="10" y="0.0" width="42" height="50"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -267,7 +267,7 @@
                                 <rect key="frame" x="0.0" y="260" width="414" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date of birth: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="88g-v8-AdL">
-                                        <rect key="frame" x="14.999999999999993" y="0.0" width="118.33333333333331" height="40"/>
+                                        <rect key="frame" x="15.000000000000007" y="0.0" width="118.66666666666669" height="40"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="21"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -435,7 +435,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="Pets Tab Icon" selectedImage="Pets Tab Icon" id="acW-dT-cKf" userLabel="Pet Icon"/>
+                    <tabBarItem key="tabBarItem" title="" image="Pet Icon" selectedImage="Pet Icon" id="acW-dT-cKf" userLabel="Pet Icon"/>
                     <navigationItem key="navigationItem" id="67g-qY-uwp"/>
                     <connections>
                         <outlet property="petTableView" destination="F3e-n1-34e" id="Luv-n3-Xan"/>
@@ -493,7 +493,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="R1H-9g-Py9"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="Vet Tab Icon" selectedImage="Vet Tab Icon" id="1Zt-OR-HpJ"/>
+                    <tabBarItem key="tabBarItem" title="" image="Vet Icon" selectedImage="Vet Icon" id="1Zt-OR-HpJ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L5D-3G-Yxv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -547,7 +547,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="News Tab Icon" selectedImage="News Tab Icon" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="" image="Dashboard Icon" selectedImage="Dashboard Icon" id="cPa-gy-q4n"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -637,12 +637,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authentication Screen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fak-zR-jk0">
-                                <rect key="frame" x="18.666666666666657" y="424" width="377" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rBi-bz-sfK" userLabel="Title Container">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                 <subviews>
@@ -679,35 +673,74 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vJc-ZJ-GFu">
-                                <rect key="frame" x="164" y="572" width="86" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <rect key="frame" x="157" y="400" width="100" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="J51-gn-Voo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                 <state key="normal" title="Button"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="confirmPressed:" destination="9ah-WE-zeT" eventType="touchUpInside" id="37E-pp-ysU"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="eoz-Tg-UBH">
+                                <rect key="frame" x="82" y="300" width="250" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="zjI-3a-UBo"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" textContentType="username"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="s1a-si-7bq">
+                                <rect key="frame" x="82" y="350" width="250" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5hI-0z-AKK">
+                                <rect key="frame" x="87" y="147" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="fak-zR-jk0" firstAttribute="centerX" secondItem="OFo-lQ-rfk" secondAttribute="centerX" id="5Yw-kr-8m1"/>
-                            <constraint firstItem="vJc-ZJ-GFu" firstAttribute="top" secondItem="fak-zR-jk0" secondAttribute="bottom" constant="100" id="8Cc-xP-Y0z"/>
+                            <constraint firstItem="s1a-si-7bq" firstAttribute="centerX" secondItem="OFo-lQ-rfk" secondAttribute="centerX" id="9RT-WB-LJH"/>
                             <constraint firstAttribute="trailing" secondItem="rBi-bz-sfK" secondAttribute="trailing" id="DSr-Z0-rPE"/>
+                            <constraint firstItem="s1a-si-7bq" firstAttribute="width" secondItem="eoz-Tg-UBH" secondAttribute="width" id="NQW-sq-edq"/>
+                            <constraint firstItem="eoz-Tg-UBH" firstAttribute="centerX" secondItem="OFo-lQ-rfk" secondAttribute="centerX" id="QJj-vz-hze"/>
+                            <constraint firstItem="s1a-si-7bq" firstAttribute="top" secondItem="eoz-Tg-UBH" secondAttribute="bottom" constant="20" id="Wfr-gt-xmz"/>
                             <constraint firstItem="rBi-bz-sfK" firstAttribute="top" secondItem="OFo-lQ-rfk" secondAttribute="top" id="Ym4-QZ-BVT"/>
                             <constraint firstItem="vJc-ZJ-GFu" firstAttribute="centerX" secondItem="OFo-lQ-rfk" secondAttribute="centerX" id="cKb-re-62t"/>
-                            <constraint firstItem="fak-zR-jk0" firstAttribute="centerY" secondItem="OFo-lQ-rfk" secondAttribute="centerY" id="rrY-bj-CrM"/>
+                            <constraint firstItem="eoz-Tg-UBH" firstAttribute="top" secondItem="rBi-bz-sfK" secondAttribute="bottom" constant="200" id="cjb-Tw-QOY"/>
+                            <constraint firstItem="vJc-ZJ-GFu" firstAttribute="top" secondItem="s1a-si-7bq" secondAttribute="bottom" constant="20" id="fDx-9f-WQ1"/>
                             <constraint firstItem="rBi-bz-sfK" firstAttribute="leading" secondItem="OFo-lQ-rfk" secondAttribute="leading" id="y2f-dY-RtS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gHy-JS-VoI"/>
                     </view>
                     <connections>
                         <outlet property="confirmButton" destination="vJc-ZJ-GFu" id="gBL-eK-djW"/>
-                        <outlet property="titleLabel" destination="fak-zR-jk0" id="Gqa-3P-Glz"/>
+                        <outlet property="logoImageView" destination="5hI-0z-AKK" id="A2c-g9-dlz"/>
+                        <outlet property="passwordTextField" destination="s1a-si-7bq" id="onc-Rp-mMK"/>
+                        <outlet property="usernameTextField" destination="eoz-Tg-UBH" id="45t-iA-RJp"/>
                         <segue destination="49e-Tb-3d3" kind="showDetail" identifier="goToMainApp" id="X55-P0-lk8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ACS-0C-a7A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-954" y="-16"/>
+            <point key="canvasLocation" x="-955.07246376811599" y="-16.071428571428569"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -784,7 +817,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="E5g-81-RRZ"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="Settings Tab Icon" selectedImage="Settings Tab Icon" id="fAi-sj-Hux"/>
+                    <tabBarItem key="tabBarItem" title="" image="Settings Icon" selectedImage="Settings Icon" id="fAi-sj-Hux"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="moV-sH-D8U" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -794,10 +827,10 @@
     </scenes>
     <resources>
         <image name="Add Button" width="30" height="30"/>
-        <image name="News Tab Icon" width="22.5" height="22.5"/>
-        <image name="Pets Tab Icon" width="22.5" height="22.5"/>
-        <image name="Settings Tab Icon" width="22.5" height="22.5"/>
-        <image name="Vet Tab Icon" width="22.5" height="22.5"/>
+        <image name="Dashboard Icon" width="23" height="23"/>
+        <image name="Pet Icon" width="23" height="23"/>
+        <image name="Settings Icon" width="23" height="23"/>
+        <image name="Vet Icon" width="23" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="SiA-kv-J8q"/>

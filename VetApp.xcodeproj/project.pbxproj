@@ -22,12 +22,12 @@
 		B62C4F5122237EEE00B98C82 /* PetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B62C4F4F22237EEE00B98C82 /* PetCell.xib */; };
 		B62C4F5522237F1500B98C82 /* AddPetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F5322237F1500B98C82 /* AddPetCell.swift */; };
 		B62C4F5622237F1500B98C82 /* AddPetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B62C4F5422237F1500B98C82 /* AddPetCell.xib */; };
-		B62C4F5A22239F9E00B98C82 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B62C4F5922239F9E00B98C82 /* GoogleService-Info.plist */; };
 		B62C4F5C222444B200B98C82 /* ExtraInspectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F5B222444B200B98C82 /* ExtraInspectorButton.swift */; };
 		B62C4F5E2224DAF100B98C82 /* CameraHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F5D2224DAF100B98C82 /* CameraHandler.swift */; };
 		B62C4F622225EA1A00B98C82 /* WelcomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F612225EA1A00B98C82 /* WelcomeScreenController.swift */; };
 		B62C4F642225EA4E00B98C82 /* AuthenticationScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F632225EA4E00B98C82 /* AuthenticationScreenController.swift */; };
 		B681EFD4221B3D8500661118 /* ConfigPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B681EFD3221B3D8500661118 /* ConfigPetController.swift */; };
+		B6D75A1B22272BB40051193D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6D75A1A22272BB30051193D /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,12 +48,14 @@
 		B62C4F4F22237EEE00B98C82 /* PetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PetCell.xib; sourceTree = "<group>"; };
 		B62C4F5322237F1500B98C82 /* AddPetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetCell.swift; sourceTree = "<group>"; };
 		B62C4F5422237F1500B98C82 /* AddPetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPetCell.xib; sourceTree = "<group>"; };
-		B62C4F5922239F9E00B98C82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B62C4F5B222444B200B98C82 /* ExtraInspectorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraInspectorButton.swift; sourceTree = "<group>"; };
 		B62C4F5D2224DAF100B98C82 /* CameraHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHandler.swift; sourceTree = "<group>"; };
 		B62C4F612225EA1A00B98C82 /* WelcomeScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenController.swift; sourceTree = "<group>"; };
 		B62C4F632225EA4E00B98C82 /* AuthenticationScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationScreenController.swift; sourceTree = "<group>"; };
 		B681EFD3221B3D8500661118 /* ConfigPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPetController.swift; sourceTree = "<group>"; };
+		B6D75A18222729DE0051193D /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Main.strings"; sourceTree = "<group>"; };
+		B6D75A19222729E00051193D /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		B6D75A1A22272BB30051193D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C3EF37773E16A7B4A8B41595 /* Pods_VetApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VetApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4AFCDCE617D39C73118DCD3 /* Pods-VetApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VetApp.release.xcconfig"; path = "Target Support Files/Pods-VetApp/Pods-VetApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,11 +120,10 @@
 			isa = PBXGroup;
 			children = (
 				B60352222219A1680070583B /* AppDelegate.swift */,
-				B603522D2219A1690070583B /* LaunchScreen.storyboard */,
-				B60352302219A1690070583B /* Info.plist */,
-				B62C4F5922239F9E00B98C82 /* GoogleService-Info.plist */,
 				B62C4F5B222444B200B98C82 /* ExtraInspectorButton.swift */,
 				B62C4F5D2224DAF100B98C82 /* CameraHandler.swift */,
+				B60352302219A1690070583B /* Info.plist */,
+				B6D75A1A22272BB30051193D /* GoogleService-Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -139,6 +140,7 @@
 		B62C4F472223751600B98C82 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B603522D2219A1690070583B /* LaunchScreen.storyboard */,
 				B60352282219A1680070583B /* Main.storyboard */,
 				B62C4F5222237EF800B98C82 /* Pet Cell */,
 				B62C4F4D22237E9D00B98C82 /* AddPet Cell */,
@@ -246,7 +248,7 @@
 				B62C4F5122237EEE00B98C82 /* PetCell.xib in Resources */,
 				B603522C2219A1690070583B /* Assets.xcassets in Resources */,
 				B603522A2219A1680070583B /* Main.storyboard in Resources */,
-				B62C4F5A22239F9E00B98C82 /* GoogleService-Info.plist in Resources */,
+				B6D75A1B22272BB40051193D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +348,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B60352292219A1680070583B /* Base */,
+				B6D75A18222729DE0051193D /* es-419 */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B603522E2219A1690070583B /* Base */,
+				B6D75A19222729E00051193D /* es-419 */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -365,6 +369,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -426,6 +431,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

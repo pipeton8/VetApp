@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>63180036371-abpc9vhkmos23b49e64boa02ql28cu9q.apps.googleusercontent.com</string>
+	<string>63180036371-vvrkcnt6esujplhlef0fjlf4fjvh8r81.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.63180036371-abpc9vhkmos23b49e64boa02ql28cu9q</string>
+	<string>com.googleusercontent.apps.63180036371-vvrkcnt6esujplhlef0fjlf4fjvh8r81</string>
 	<key>API_KEY</key>
 	<string>AIzaSyD2xs8JY0M9Ylhx4N0ZtRC7fsOfXGA4ekQ</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.brokenkeystudios.vetapp</string>
+	<string>com.brokenkeystudios.VetApp</string>
 	<key>PROJECT_ID</key>
 	<string>vetapp-a82e6</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:63180036371:ios:fe861251512f2348</string>
+	<string>1:63180036371:ios:6b57798d74c0f6d2</string>
 	<key>DATABASE_URL</key>
 	<string>https://vetapp-a82e6.firebaseio.com</string>
 </dict>
