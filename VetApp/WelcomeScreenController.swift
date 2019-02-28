@@ -13,6 +13,7 @@ class WelcomeScreenController: UIViewController {
     // Segue Identifiers
     let LOGIN_SEGUE_IDENTIFIER = "goToLogin"
     let REGISTER_SEGUE_IDENTIFIER = "goToRegister"
+    let MAINAPP_SEGUE_IDENTIFIER = "goToMainApp"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,14 +29,22 @@ class WelcomeScreenController: UIViewController {
         performSegue(withIdentifier: REGISTER_SEGUE_IDENTIFIER, sender: self)
     }
     
+    @IBAction func guestPressed(_ sender: Any) {
+        performSegue(withIdentifier: MAINAPP_SEGUE_IDENTIFIER, sender: self)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! AuthenticationScreenController
-        if segue.identifier! == LOGIN_SEGUE_IDENTIFIER {
-            destinationVC.titleInScreen = "Log In Screen"
-            destinationVC.buttonTitle = "Log In"
-        } else if segue.identifier! == REGISTER_SEGUE_IDENTIFIER {
-            destinationVC.titleInScreen = "Register Screen"
-            destinationVC.buttonTitle = "Register"
+        if segue.identifier! == MAINAPP_SEGUE_IDENTIFIER {
+            print("Login as guest")
+        } else {
+            let destinationVC = segue.destination as! AuthenticationScreenController
+            if segue.identifier! == LOGIN_SEGUE_IDENTIFIER {
+                destinationVC.titleInScreen = "Log In Screen"
+                destinationVC.buttonTitle = "Log In"
+            } else if segue.identifier! == REGISTER_SEGUE_IDENTIFIER {
+                destinationVC.titleInScreen = "Register Screen"
+                destinationVC.buttonTitle = "Register"
+            }
         }
     }
     

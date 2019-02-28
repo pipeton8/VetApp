@@ -10,7 +10,7 @@
 		0BECC66270ADCBB608D75C67 /* Pods_VetApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3EF37773E16A7B4A8B41595 /* Pods_VetApp.framework */; };
 		B60352232219A1680070583B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60352222219A1680070583B /* AppDelegate.swift */; };
 		B60352252219A1680070583B /* PetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60352242219A1680070583B /* PetController.swift */; };
-		B60352272219A1680070583B /* NewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60352262219A1680070583B /* NewsController.swift */; };
+		B60352272219A1680070583B /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60352262219A1680070583B /* DashboardController.swift */; };
 		B603522A2219A1680070583B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B60352282219A1680070583B /* Main.storyboard */; };
 		B603522C2219A1690070583B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B603522B2219A1690070583B /* Assets.xcassets */; };
 		B603522F2219A1690070583B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B603522D2219A1690070583B /* LaunchScreen.storyboard */; };
@@ -26,6 +26,8 @@
 		B62C4F5E2224DAF100B98C82 /* CameraHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F5D2224DAF100B98C82 /* CameraHandler.swift */; };
 		B62C4F622225EA1A00B98C82 /* WelcomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F612225EA1A00B98C82 /* WelcomeScreenController.swift */; };
 		B62C4F642225EA4E00B98C82 /* AuthenticationScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F632225EA4E00B98C82 /* AuthenticationScreenController.swift */; };
+		B678993122277CE80097530C /* FredokaOne-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B678992F22277CE70097530C /* FredokaOne-Regular.otf */; };
+		B678993222277CE80097530C /* Fredoka dingbats.otf in Resources */ = {isa = PBXBuildFile; fileRef = B678993022277CE80097530C /* Fredoka dingbats.otf */; };
 		B681EFD4221B3D8500661118 /* ConfigPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B681EFD3221B3D8500661118 /* ConfigPetController.swift */; };
 		B6D75A1B22272BB40051193D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6D75A1A22272BB30051193D /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -35,7 +37,7 @@
 		B603521F2219A1680070583B /* VetApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VetApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B60352222219A1680070583B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B60352242219A1680070583B /* PetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetController.swift; sourceTree = "<group>"; };
-		B60352262219A1680070583B /* NewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsController.swift; sourceTree = "<group>"; };
+		B60352262219A1680070583B /* DashboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
 		B60352292219A1680070583B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B603522B2219A1690070583B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B603522E2219A1690070583B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -52,6 +54,8 @@
 		B62C4F5D2224DAF100B98C82 /* CameraHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHandler.swift; sourceTree = "<group>"; };
 		B62C4F612225EA1A00B98C82 /* WelcomeScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenController.swift; sourceTree = "<group>"; };
 		B62C4F632225EA4E00B98C82 /* AuthenticationScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationScreenController.swift; sourceTree = "<group>"; };
+		B678992F22277CE70097530C /* FredokaOne-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FredokaOne-Regular.otf"; sourceTree = "<group>"; };
+		B678993022277CE80097530C /* Fredoka dingbats.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredoka dingbats.otf"; sourceTree = "<group>"; };
 		B681EFD3221B3D8500661118 /* ConfigPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPetController.swift; sourceTree = "<group>"; };
 		B6D75A18222729DE0051193D /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Main.strings"; sourceTree = "<group>"; };
 		B6D75A19222729E00051193D /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 		B60352212219A1680070583B /* VetApp */ = {
 			isa = PBXGroup;
 			children = (
+				B678992E22277CBF0097530C /* Fonts */,
 				B62C4F472223751600B98C82 /* View */,
 				B6035241221A602E0070583B /* Model */,
 				B603523B2219AED20070583B /* Controller */,
@@ -108,7 +113,7 @@
 				B62C4F612225EA1A00B98C82 /* WelcomeScreenController.swift */,
 				B60352242219A1680070583B /* PetController.swift */,
 				B681EFD3221B3D8500661118 /* ConfigPetController.swift */,
-				B60352262219A1680070583B /* NewsController.swift */,
+				B60352262219A1680070583B /* DashboardController.swift */,
 				B60352382219A6880070583B /* VetController.swift */,
 				B603523F221A4A840070583B /* SettingsController.swift */,
 				B62C4F632225EA4E00B98C82 /* AuthenticationScreenController.swift */,
@@ -164,6 +169,15 @@
 				B62C4F4F22237EEE00B98C82 /* PetCell.xib */,
 			);
 			name = "Pet Cell";
+			sourceTree = "<group>";
+		};
+		B678992E22277CBF0097530C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B678993022277CE80097530C /* Fredoka dingbats.otf */,
+				B678992F22277CE70097530C /* FredokaOne-Regular.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		C1FF455A77817EE245388CB8 /* Pods */ = {
@@ -243,8 +257,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B678993122277CE80097530C /* FredokaOne-Regular.otf in Resources */,
 				B603522F2219A1690070583B /* LaunchScreen.storyboard in Resources */,
 				B62C4F5622237F1500B98C82 /* AddPetCell.xib in Resources */,
+				B678993222277CE80097530C /* Fredoka dingbats.otf in Resources */,
 				B62C4F5122237EEE00B98C82 /* PetCell.xib in Resources */,
 				B603522C2219A1690070583B /* Assets.xcassets in Resources */,
 				B603522A2219A1680070583B /* Main.storyboard in Resources */,
@@ -326,7 +342,7 @@
 			files = (
 				B6035240221A4A840070583B /* SettingsController.swift in Sources */,
 				B62C4F5022237EEE00B98C82 /* PetCell.swift in Sources */,
-				B60352272219A1680070583B /* NewsController.swift in Sources */,
+				B60352272219A1680070583B /* DashboardController.swift in Sources */,
 				B60352232219A1680070583B /* AppDelegate.swift in Sources */,
 				B6035243221A603F0070583B /* Pet.swift in Sources */,
 				B62C4F622225EA1A00B98C82 /* WelcomeScreenController.swift in Sources */,
