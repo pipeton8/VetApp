@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WelcomeScreenController: UIViewController {
+class WelcomeViewController: UIViewController {
 
     // Segue Identifiers
     let LOGIN_SEGUE_IDENTIFIER = "goToLogin"
@@ -37,7 +37,7 @@ class WelcomeScreenController: UIViewController {
         if segue.identifier! == MAINAPP_SEGUE_IDENTIFIER {
             print("Login as guest")
         } else {
-            let destinationVC = segue.destination as! AuthenticationScreenController
+            let destinationVC = segue.destination as! AuthenticationViewController
             if segue.identifier! == LOGIN_SEGUE_IDENTIFIER {
                 destinationVC.titleInScreen = "Log In Screen"
                 destinationVC.buttonTitle = "Log In"

@@ -22,13 +22,14 @@
 		B62C4F5122237EEE00B98C82 /* PetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B62C4F4F22237EEE00B98C82 /* PetCell.xib */; };
 		B62C4F5522237F1500B98C82 /* AddPetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F5322237F1500B98C82 /* AddPetCell.swift */; };
 		B62C4F5622237F1500B98C82 /* AddPetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B62C4F5422237F1500B98C82 /* AddPetCell.xib */; };
-		B62C4F5C222444B200B98C82 /* ExtraInspectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F5B222444B200B98C82 /* ExtraInspectorButton.swift */; };
+		B62C4F5C222444B200B98C82 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F5B222444B200B98C82 /* Extensions.swift */; };
 		B62C4F5E2224DAF100B98C82 /* CameraHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F5D2224DAF100B98C82 /* CameraHandler.swift */; };
-		B62C4F622225EA1A00B98C82 /* WelcomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F612225EA1A00B98C82 /* WelcomeScreenController.swift */; };
-		B62C4F642225EA4E00B98C82 /* AuthenticationScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F632225EA4E00B98C82 /* AuthenticationScreenController.swift */; };
+		B62C4F622225EA1A00B98C82 /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F612225EA1A00B98C82 /* WelcomeController.swift */; };
+		B62C4F642225EA4E00B98C82 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F632225EA4E00B98C82 /* AuthenticationController.swift */; };
 		B678993122277CE80097530C /* FredokaOne-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B678992F22277CE70097530C /* FredokaOne-Regular.otf */; };
 		B678993222277CE80097530C /* Fredoka dingbats.otf in Resources */ = {isa = PBXBuildFile; fileRef = B678993022277CE80097530C /* Fredoka dingbats.otf */; };
 		B681EFD4221B3D8500661118 /* ConfigPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B681EFD3221B3D8500661118 /* ConfigPetController.swift */; };
+		B69E46B6222849E4005A0880 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E46B5222849E4005A0880 /* User.swift */; };
 		B6D75A1B22272BB40051193D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6D75A1A22272BB30051193D /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -50,15 +51,18 @@
 		B62C4F4F22237EEE00B98C82 /* PetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PetCell.xib; sourceTree = "<group>"; };
 		B62C4F5322237F1500B98C82 /* AddPetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetCell.swift; sourceTree = "<group>"; };
 		B62C4F5422237F1500B98C82 /* AddPetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPetCell.xib; sourceTree = "<group>"; };
-		B62C4F5B222444B200B98C82 /* ExtraInspectorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraInspectorButton.swift; sourceTree = "<group>"; };
+		B62C4F5B222444B200B98C82 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B62C4F5D2224DAF100B98C82 /* CameraHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHandler.swift; sourceTree = "<group>"; };
-		B62C4F612225EA1A00B98C82 /* WelcomeScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenController.swift; sourceTree = "<group>"; };
-		B62C4F632225EA4E00B98C82 /* AuthenticationScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationScreenController.swift; sourceTree = "<group>"; };
+		B62C4F612225EA1A00B98C82 /* WelcomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
+		B62C4F632225EA4E00B98C82 /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		B678992F22277CE70097530C /* FredokaOne-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FredokaOne-Regular.otf"; sourceTree = "<group>"; };
 		B678993022277CE80097530C /* Fredoka dingbats.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredoka dingbats.otf"; sourceTree = "<group>"; };
+		B6789934222816970097530C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		B6789935222817610097530C /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		B6789936222817630097530C /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Main.strings"; sourceTree = "<group>"; };
 		B681EFD3221B3D8500661118 /* ConfigPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPetController.swift; sourceTree = "<group>"; };
-		B6D75A18222729DE0051193D /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Main.strings"; sourceTree = "<group>"; };
-		B6D75A19222729E00051193D /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		B69E46B422284953005A0880 /* VetApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VetApp.entitlements; sourceTree = "<group>"; };
+		B69E46B5222849E4005A0880 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B6D75A1A22272BB30051193D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C3EF37773E16A7B4A8B41595 /* Pods_VetApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VetApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4AFCDCE617D39C73118DCD3 /* Pods-VetApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VetApp.release.xcconfig"; path = "Target Support Files/Pods-VetApp/Pods-VetApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -97,6 +101,7 @@
 		B60352212219A1680070583B /* VetApp */ = {
 			isa = PBXGroup;
 			children = (
+				B69E46B422284953005A0880 /* VetApp.entitlements */,
 				B678992E22277CBF0097530C /* Fonts */,
 				B62C4F472223751600B98C82 /* View */,
 				B6035241221A602E0070583B /* Model */,
@@ -110,13 +115,13 @@
 		B603523B2219AED20070583B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				B62C4F612225EA1A00B98C82 /* WelcomeScreenController.swift */,
+				B62C4F612225EA1A00B98C82 /* WelcomeController.swift */,
 				B60352242219A1680070583B /* PetController.swift */,
 				B681EFD3221B3D8500661118 /* ConfigPetController.swift */,
 				B60352262219A1680070583B /* DashboardController.swift */,
 				B60352382219A6880070583B /* VetController.swift */,
 				B603523F221A4A840070583B /* SettingsController.swift */,
-				B62C4F632225EA4E00B98C82 /* AuthenticationScreenController.swift */,
+				B62C4F632225EA4E00B98C82 /* AuthenticationController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -125,7 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				B60352222219A1680070583B /* AppDelegate.swift */,
-				B62C4F5B222444B200B98C82 /* ExtraInspectorButton.swift */,
+				B62C4F5B222444B200B98C82 /* Extensions.swift */,
 				B62C4F5D2224DAF100B98C82 /* CameraHandler.swift */,
 				B60352302219A1690070583B /* Info.plist */,
 				B6D75A1A22272BB30051193D /* GoogleService-Info.plist */,
@@ -138,6 +143,7 @@
 			children = (
 				B6035244221A61CB0070583B /* SpeciesRaces.swift */,
 				B6035242221A603F0070583B /* Pet.swift */,
+				B69E46B5222849E4005A0880 /* User.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -209,6 +215,7 @@
 				B603521C2219A1680070583B /* Frameworks */,
 				B603521D2219A1680070583B /* Resources */,
 				76A6A569810CE6FC504466EE /* [CP] Embed Pods Frameworks */,
+				B0908066D92E010DE7F9DCB9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -231,6 +238,11 @@
 				TargetAttributes = {
 					B603521E2219A1680070583B = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -280,12 +292,19 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-VetApp/Pods-VetApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -295,12 +314,19 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -333,6 +359,44 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B0908066D92E010DE7F9DCB9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VetApp/Pods-VetApp-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAnonymousAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseEmailAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseFacebookAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseGoogleAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebasePhoneAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseTwitterAuthUI.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAnonymousAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseEmailAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseFacebookAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseGoogleAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebasePhoneAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseTwitterAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VetApp/Pods-VetApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -345,11 +409,12 @@
 				B60352272219A1680070583B /* DashboardController.swift in Sources */,
 				B60352232219A1680070583B /* AppDelegate.swift in Sources */,
 				B6035243221A603F0070583B /* Pet.swift in Sources */,
-				B62C4F622225EA1A00B98C82 /* WelcomeScreenController.swift in Sources */,
+				B62C4F622225EA1A00B98C82 /* WelcomeController.swift in Sources */,
 				B681EFD4221B3D8500661118 /* ConfigPetController.swift in Sources */,
-				B62C4F642225EA4E00B98C82 /* AuthenticationScreenController.swift in Sources */,
+				B62C4F642225EA4E00B98C82 /* AuthenticationController.swift in Sources */,
+				B69E46B6222849E4005A0880 /* User.swift in Sources */,
 				B62C4F5E2224DAF100B98C82 /* CameraHandler.swift in Sources */,
-				B62C4F5C222444B200B98C82 /* ExtraInspectorButton.swift in Sources */,
+				B62C4F5C222444B200B98C82 /* Extensions.swift in Sources */,
 				B60352392219A6880070583B /* VetController.swift in Sources */,
 				B60352252219A1680070583B /* PetController.swift in Sources */,
 				B62C4F5522237F1500B98C82 /* AddPetCell.swift in Sources */,
@@ -364,7 +429,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				B60352292219A1680070583B /* Base */,
-				B6D75A18222729DE0051193D /* es-419 */,
+				B6789934222816970097530C /* en */,
+				B6789936222817630097530C /* es-419 */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -373,7 +439,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B603522E2219A1690070583B /* Base */,
-				B6D75A19222729E00051193D /* es-419 */,
+				B6789935222817610097530C /* es-419 */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -504,6 +570,7 @@
 			baseConfigurationReference = 509AB7DDBF5D9F8D89D8B02F /* Pods-VetApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = VetApp/VetApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2D86RYF628;
 				INFOPLIST_FILE = VetApp/Info.plist;
@@ -524,6 +591,7 @@
 			baseConfigurationReference = F4AFCDCE617D39C73118DCD3 /* Pods-VetApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = VetApp/VetApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2D86RYF628;
 				INFOPLIST_FILE = VetApp/Info.plist;

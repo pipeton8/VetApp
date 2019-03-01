@@ -1,9 +1,9 @@
 
 /* Class = "UIButton"; normalTitle = "Add"; ObjectID = "0hY-a0-4Za"; */
-"0hY-a0-4Za.normalTitle" = "Añadir";
+"0hY-a0-4Za.normalTitle" = "Add";
 
 /* Class = "UILabel"; text = "Date of birth: "; ObjectID = "88g-v8-AdL"; */
-"88g-v8-AdL.text" = "Fecha de nacimiento: ";
+"88g-v8-AdL.text" = "Date of birth: ";
 
 /* Class = "UILabel"; text = "VetApp"; ObjectID = "A5g-xy-fL4"; */
 "A5g-xy-fL4.text" = "VetApp";
@@ -15,13 +15,13 @@
 "G4T-RS-Flw.text" = "VetApp";
 
 /* Class = "UIButton"; normalTitle = "Enter as guest"; ObjectID = "IBe-iH-4On"; */
-"IBe-iH-4On.normalTitle" = "Entrar como invitado";
+"IBe-iH-4On.normalTitle" = "Enter as guest";
 
 /* Class = "UIButton"; normalTitle = "Log In"; ObjectID = "IwI-nO-tbv"; */
-"IwI-nO-tbv.normalTitle" = "Ingresar";
+"IwI-nO-tbv.normalTitle" = "Log In";
 
 /* Class = "UILabel"; text = "Species:"; ObjectID = "LzL-3A-kkp"; */
-"LzL-3A-kkp.text" = "Especie:";
+"LzL-3A-kkp.text" = "Species:";
 
 /* Class = "UIButton"; normalTitle = "M"; ObjectID = "QGO-of-KLl"; */
 "QGO-of-KLl.normalTitle" = "M";
@@ -30,7 +30,7 @@
 "WG8-Iu-Ie4.title" = "Welcome View Controller Scene";
 
 /* Class = "UITextField"; placeholder = "Insert chip number"; ObjectID = "X3W-x7-P4N"; */
-"X3W-x7-P4N.placeholder" = "Inserte número de chip";
+"X3W-x7-P4N.placeholder" = "Insert chip number";
 
 /* Class = "UILabel"; text = "VetApp"; ObjectID = "XwQ-Pb-lKx"; */
 "XwQ-Pb-lKx.text" = "VetApp";
@@ -39,25 +39,25 @@
 "ZoI-9r-1Z5.text" = "VetApp";
 
 /* Class = "UILabel"; text = "Name:"; ObjectID = "ah1-e8-02P"; */
-"ah1-e8-02P.text" = "Nombre:";
+"ah1-e8-02P.text" = "Name:";
 
 /* Class = "UIButton"; normalTitle = "Select..."; ObjectID = "eAN-Vh-XQi"; */
-"eAN-Vh-XQi.normalTitle" = "Seleccionar...";
+"eAN-Vh-XQi.normalTitle" = "Select...";
 
 /* Class = "UILabel"; text = "Chip Number:"; ObjectID = "eTk-Kb-hjU"; */
-"eTk-Kb-hjU.text" = "Número de Chip:";
+"eTk-Kb-hjU.text" = "Chip Number:";
 
 /* Class = "UITextField"; placeholder = "Username"; ObjectID = "eoz-Tg-UBH"; */
-"eoz-Tg-UBH.placeholder" = "Usuario";
+"eoz-Tg-UBH.placeholder" = "Username";
 
 /* Class = "UILabel"; text = "Race:"; ObjectID = "gpC-h2-rUf"; */
-"gpC-h2-rUf.text" = "Raza:";
+"gpC-h2-rUf.text" = "Race:";
 
 /* Class = "UITextField"; placeholder = "Insert name"; ObjectID = "hKG-eM-bpY"; */
-"hKG-eM-bpY.placeholder" = "Inserte nombre";
+"hKG-eM-bpY.placeholder" = "Insert name";
 
 /* Class = "UIButton"; normalTitle = "Select species..."; ObjectID = "i1t-IY-voO"; */
-"i1t-IY-voO.normalTitle" = "Seleccionar especie...";
+"i1t-IY-voO.normalTitle" = "Select species...";
 
 /* Class = "UILabel"; text = "Vet Screen"; ObjectID = "jqm-YS-46H"; */
 "jqm-YS-46H.text" = "Vet Screen";
@@ -66,10 +66,10 @@
 "l5W-rI-jX4.text" = "February 25, 2019";
 
 /* Class = "UIButton"; normalTitle = "Register"; ObjectID = "oqS-Gm-OsO"; */
-"oqS-Gm-OsO.normalTitle" = "Registrar";
+"oqS-Gm-OsO.normalTitle" = "Register";
 
 /* Class = "UITextField"; placeholder = "Password"; ObjectID = "s1a-si-7bq"; */
-"s1a-si-7bq.placeholder" = "Contraseña";
+"s1a-si-7bq.placeholder" = "Password";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "vJc-ZJ-GFu"; */
 "vJc-ZJ-GFu.normalTitle" = "Button";
