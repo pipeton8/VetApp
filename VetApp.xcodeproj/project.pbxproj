@@ -25,6 +25,8 @@
 		B62C4F5C222444B200B98C82 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F5B222444B200B98C82 /* Extensions.swift */; };
 		B62C4F5E2224DAF100B98C82 /* CameraHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F5D2224DAF100B98C82 /* CameraHandler.swift */; };
 		B62C4F642225EA4E00B98C82 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62C4F632225EA4E00B98C82 /* AuthenticationController.swift */; };
+		B66BB0DA222C53D200E65473 /* RedAlertPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66BB0D8222C53D200E65473 /* RedAlertPop.swift */; };
+		B66BB0DB222C53D200E65473 /* RedAlertPop.xib in Resources */ = {isa = PBXBuildFile; fileRef = B66BB0D9222C53D200E65473 /* RedAlertPop.xib */; };
 		B6773FFF2229E83C008F8BF2 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6773FFE2229E83C008F8BF2 /* RegisterController.swift */; };
 		B678993122277CE80097530C /* FredokaOne-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B678992F22277CE70097530C /* FredokaOne-Regular.otf */; };
 		B678993222277CE80097530C /* Fredoka dingbats.otf in Resources */ = {isa = PBXBuildFile; fileRef = B678993022277CE80097530C /* Fredoka dingbats.otf */; };
@@ -54,6 +56,8 @@
 		B62C4F5B222444B200B98C82 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B62C4F5D2224DAF100B98C82 /* CameraHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHandler.swift; sourceTree = "<group>"; };
 		B62C4F632225EA4E00B98C82 /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
+		B66BB0D8222C53D200E65473 /* RedAlertPop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedAlertPop.swift; sourceTree = "<group>"; };
+		B66BB0D9222C53D200E65473 /* RedAlertPop.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RedAlertPop.xib; sourceTree = "<group>"; };
 		B6773FFC2229CFBA008F8BF2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		B6773FFD2229CFBC008F8BF2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		B6773FFE2229E83C008F8BF2 /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
@@ -154,6 +158,7 @@
 				B60352282219A1680070583B /* Main.storyboard */,
 				B62C4F5222237EF800B98C82 /* Pet Cell */,
 				B62C4F4D22237E9D00B98C82 /* AddPet Cell */,
+				B66BB0D7222C53A000E65473 /* Red Alert PopView */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -174,6 +179,15 @@
 				B62C4F4F22237EEE00B98C82 /* PetCell.xib */,
 			);
 			name = "Pet Cell";
+			sourceTree = "<group>";
+		};
+		B66BB0D7222C53A000E65473 /* Red Alert PopView */ = {
+			isa = PBXGroup;
+			children = (
+				B66BB0D8222C53D200E65473 /* RedAlertPop.swift */,
+				B66BB0D9222C53D200E65473 /* RedAlertPop.xib */,
+			);
+			name = "Red Alert PopView";
 			sourceTree = "<group>";
 		};
 		B678992E22277CBF0097530C /* Fonts */ = {
@@ -273,6 +287,7 @@
 				B678993222277CE80097530C /* Fredoka dingbats.otf in Resources */,
 				B62C4F5122237EEE00B98C82 /* PetCell.xib in Resources */,
 				B603522C2219A1690070583B /* Assets.xcassets in Resources */,
+				B66BB0DB222C53D200E65473 /* RedAlertPop.xib in Resources */,
 				B603522A2219A1680070583B /* Main.storyboard in Resources */,
 				B6D75A1B22272BB40051193D /* GoogleService-Info.plist in Resources */,
 			);
@@ -416,6 +431,7 @@
 				B60352392219A6880070583B /* VetController.swift in Sources */,
 				B60352252219A1680070583B /* PetController.swift in Sources */,
 				B62C4F5522237F1500B98C82 /* AddPetCell.swift in Sources */,
+				B66BB0DA222C53D200E65473 /* RedAlertPop.swift in Sources */,
 				B6035245221A61CB0070583B /* SpeciesRaces.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

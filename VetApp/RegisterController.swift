@@ -8,20 +8,20 @@
 
 import UIKit
 import Firebase
+import ChameleonFramework
 
-class RegisterViewController: UIViewController, UITextFieldDelegate {
+class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate {
     
     // MARK: - Properties
 
     // Segue identifier
     let MAINAPP_SEGUE_IDENTIFIER = "goToMainApp"
     
-    
     // Logo ImageView
     @IBOutlet weak var logoImageView: UIImageView!
     
     // Username TextField
-    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     
     // Password TextField
     let EYE_OPEN_IMAGE_NAME = "eyeIcon"
@@ -42,15 +42,18 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     let LAYOUT_FOR_KEYBOARD_ANIM_TIME : TimeInterval = 0.15
     var REGISTERBUTTON_DEFAULT_MAXY : CGFloat = 0.0 // must be fetched on viewDidLoad
     var DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT : CGFloat = 0.0 // must be fetched on viewDidLoad
-    
     @IBOutlet weak var abovePositionConstraint: NSLayoutConstraint!
     @IBOutlet weak var belowPositionConstraint: NSLayoutConstraint!
     
+    // Alert PopOver
+    let RED_ALERT_IDENTIFIER : String = "RedAlertPop"
+    var alertShowing : Bool = false
+    
     ////////////////////////////////////////////////////
     //MARK: - viewDidLoad and viewWillLoad methods
-    
+
     fileprivate func ConformToProtocols() {
-        usernameTextField.delegate = self
+        emailTextField.delegate = self
         passwordTextField.delegate = self
     }
     
@@ -59,7 +62,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(textDidChange(_:)),
                                                name: UITextField.textDidChangeNotification,
-                                               object: usernameTextField)
+                                               object: emailTextField)
         
         // passwordTextField change text notification
         NotificationCenter.default.addObserver(self,
@@ -101,12 +104,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         AddToNotificationObservers()
         GetConstants()
     }
-
+    
     ////////////////////////////////////////////////////
     // MARK: - Textfield Methods
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
-        if textField == usernameTextField {
+        if textField == emailTextField {
             passwordTextField.becomeFirstResponder()
         } else {
             if CanConfirm() {
@@ -161,21 +164,66 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     ////////////////////////////////////////////////////
     // MARK: - Authenticate Methods
     @IBAction func registerPressed(_ sender: Any) {
-        let username = usernameTextField.text!
+        let email = emailTextField.text!
         let password = passwordTextField.text!
-        RegisterWith(username, password)
-        performSegue(withIdentifier: MAINAPP_SEGUE_IDENTIFIER, sender: self)
+        RegisterWith(email, password) { (error,success) in
+            if success {
+                self.performSegue(withIdentifier: self.MAINAPP_SEGUE_IDENTIFIER, sender: self)
+            } else {
+                self.AlertErrorInAuth(withCode : AuthErrorCode(rawValue: error!._code)!)
+            }
+        }
     }
 
-    fileprivate func RegisterWith(_ username : String, _ password : String) {
-        print("User \(username) with password \(password) wants to log in")
+    fileprivate func RegisterWith(_ email : String, _ password : String, _ onCompletion : @escaping (Error?, Bool) -> Void ) {
+        Auth.auth().createUser(withEmail: email, password: password) { (_, error) in
+            let success = error == nil
+            onCompletion(error, success)
+        }
+    }
+    
+    fileprivate func AlertErrorInAuth(withCode code : AuthErrorCode) {
+        switch code {
+        case .invalidEmail:
+            ShowAlert(withText: "E-mail is not valid.")
+        case .emailAlreadyInUse:
+            ShowAlert(withText: "E-mail is already in use.")
+        default:
+            break
+        }
+    }
+    
+    fileprivate func ShowAlert(withText text : String) {
+        // instantiate
+        alertShowing = true
+        let alertVC = RedAlertPop.init(nibName: RED_ALERT_IDENTIFIER, bundle: nil)
+        
+        // configure appearance
+        alertVC.modalPresentationStyle = .popover
+        alertVC.preferredContentSize = CGSize(width: emailTextField.bounds.width, height: 30)
+        let popoverController = alertVC.popoverPresentationController!
+        popoverController.delegate = self
+        popoverController.backgroundColor = UIColor.flatRed()
+        popoverController.permittedArrowDirections = .down
+        popoverController.sourceView = emailTextField.superview
+        popoverController.sourceRect = emailTextField.bounds
+        
+        // set text
+        alertVC.alertText = text
+
+        // display
+        present(alertVC, animated: true, completion: nil)
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
     }
     
 
     ////////////////////////////////////////////////////
     // MARK: - Views Navigation Methods
     fileprivate func CanConfirm() -> Bool {
-        return usernameTextField.text! != "" && passwordTextField.text! != ""
+        return emailTextField.text! != "" && passwordTextField.text! != ""
     }
     
     fileprivate func UpdateConfirmButton(if enabled : Bool) {
@@ -189,7 +237,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
     
     fileprivate func DismissKeyboard() {
-        usernameTextField.resignFirstResponder()
+        emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
     

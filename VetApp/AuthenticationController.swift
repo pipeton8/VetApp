@@ -21,7 +21,7 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var logoImageView: UIImageView!
 
     // Username TextField
-    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
 
     // Password TextField
     let EYE_OPEN_IMAGE_NAME = "eyeIcon"
@@ -49,7 +49,7 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
     //MARK: - viewDidLoad and viewWillLoad methods
     
     fileprivate func ConformToProtocols() {
-        usernameTextField.delegate = self
+        emailTextField.delegate = self
         passwordTextField.delegate = self
     }
     
@@ -58,7 +58,7 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(textDidChange(_:)),
                                                name: UITextField.textDidChangeNotification,
-                                               object: usernameTextField)
+                                               object: emailTextField)
         
         // passwordTextField change text notification
         NotificationCenter.default.addObserver(self,
@@ -105,7 +105,7 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Textfield Methods
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
-        if textField == usernameTextField {
+        if textField == emailTextField {
             passwordTextField.becomeFirstResponder()
         } else {
             if CanConfirm() {
@@ -164,7 +164,7 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func confirmPressed(_ sender: Any) {
-        let username = usernameTextField.text!
+        let username = emailTextField.text!
         let password = passwordTextField.text!
         AuthenticateWith(username, password)
         performSegue(withIdentifier: MAINAPP_SEGUE_IDENTIFIER, sender: self)
@@ -183,7 +183,7 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
     ////////////////////////////////////////////////////
     // MARK: - Views Navigation Methods
     fileprivate func CanConfirm() -> Bool {
-        return usernameTextField.text! != "" && passwordTextField.text! != ""
+        return emailTextField.text! != "" && passwordTextField.text! != ""
     }
     
     fileprivate func UpdateConfirmButton(if enabled : Bool) {
@@ -197,7 +197,7 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
     }
     
     fileprivate func DismissKeyboard() {
-        usernameTextField.resignFirstResponder()
+        emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
     
