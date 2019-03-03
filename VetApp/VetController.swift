@@ -13,7 +13,7 @@ class VetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("I'm in vet scene")
+        print("I'm in the vet!")
     }
 
 }

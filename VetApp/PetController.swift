@@ -14,6 +14,8 @@ import SVProgressHUD
 
 class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ConfigPetDelegate {
 
+    // MARK: - Properties
+
     // Table View Consts and Variables
     let PET_CELL_ID = "petCell"
     let PET_CELL_XIB = "PetCell" // the name of the XIB file
@@ -36,7 +38,7 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     //////////////////////////////////////////////////////////////
     
-    // MARK: ViewDidLoad and ViewWillLoad overrides
+    // MARK: - ViewDidLoad and ViewWillLoad overrides
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,7 +61,7 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     //////////////////////////////////////////////////////////////
     
-    // MARK: TableView Methods
+    // MARK: - TableView Methods
     func loadImage(from pet: Pet) -> UIImage? {
         if pet.imagePath == "" { return nil }
         
@@ -111,7 +113,7 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     //////////////////////////////////////////////////////////////
     
-    // MARK: PullToRefresh
+    // MARK: - PullToRefresh
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:
@@ -129,7 +131,7 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     //////////////////////////////////////////////////////////////
     
-    // MARK: Networking
+    // MARK: - Networking
     fileprivate func RetrievePets(showHUD : Bool = false) {
         if showHUD { SVProgressHUD.show() }
         let petDB = Firestore.firestore().collection(PET_DATABASE_ID)
@@ -165,7 +167,7 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     //////////////////////////////////////////////////////////////
     
-    // MARK: Segue methods
+    // MARK: - Segue methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let configPetVC = segue.destination as! ConfigPetViewController
         configPetVC.delegate = self
@@ -179,7 +181,7 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     //////////////////////////////////////////////////////////////
     
-    // MARK: AddPet and EditPet methods
+    // MARK: - AddPet and EditPet methods
     func PetAdded(newPet: Pet) {
         petArray.append(newPet)
         numberOfPets += 1
@@ -193,9 +195,5 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         UploadPet(pet)
         petTableView.reloadData()
     }
-    
-    
-
-
 }
 

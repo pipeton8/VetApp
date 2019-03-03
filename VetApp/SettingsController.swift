@@ -13,7 +13,7 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("I'm in settings scene")
+        print("I'm inside settings")
     }
 
 }

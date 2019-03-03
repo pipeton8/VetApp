@@ -1,28 +1,28 @@
 //
-//  AuthenticationScreenController.swif
+//  RegisterController.swift
 //  VetApp
 //
-//  Created by Felipe Del Canto Monge on 2/26/19.
+//  Created by Felipe Del Canto Monge on 3/1/19.
 //  Copyright © 2019 Felipe Del Canto. All rights reserved.
 //
 
 import UIKit
 import Firebase
 
-class AuthenticationViewController: UIViewController, UITextFieldDelegate {
+class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
 
     // Segue identifier
     let MAINAPP_SEGUE_IDENTIFIER = "goToMainApp"
-    let REGISTER_SEGUE_IDENTIFIER = "goToRegister"
+    
     
     // Logo ImageView
     @IBOutlet weak var logoImageView: UIImageView!
-
+    
     // Username TextField
     @IBOutlet weak var usernameTextField: UITextField!
-
+    
     // Password TextField
     let EYE_OPEN_IMAGE_NAME = "eyeIcon"
     let EYE_CLOSED_IMAGE_NAME = "notEyeIcon"
@@ -31,17 +31,18 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var HIDE_PASSWORD_BUTTON_VERTICAL_OFFSET: NSLayoutConstraint!
     @IBOutlet weak var hidePasswordButton: UIButton!
     @IBOutlet weak var passwordTextField: UITextFieldPadding!
-
-    // Login Button
-    let LOGIN_BUTTON_ENABLED_ALPHA : CGFloat = 0.8
-    let LOGIN_BUTTON_DISABLED_ALPHA : CGFloat = 0.2
-    @IBOutlet weak var loginButton: UIButton!
-
+    
+    // Register Button
+    let REGISTER_BUTTON_ENABLED_ALPHA : CGFloat = 0.8
+    let REGISTER_BUTTON_DISABLED_ALPHA : CGFloat = 0.2
+    @IBOutlet weak var registerButton: UIButton!
+    
     // Keyboard layout adjustments
-    let LOGIN_BUTTON_KEYBOARD_OFFSET : CGFloat = 10.0
+    let REGISTERBUTTON_KEYBOARD_OFFSET : CGFloat = 10.0
     let LAYOUT_FOR_KEYBOARD_ANIM_TIME : TimeInterval = 0.15
-    var LOGINBUTTON_DEFAULT_MAXY : CGFloat = 0.0 // must be fetched on viewDidLoad
+    var REGISTERBUTTON_DEFAULT_MAXY : CGFloat = 0.0 // must be fetched on viewDidLoad
     var DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT : CGFloat = 0.0 // must be fetched on viewDidLoad
+    
     @IBOutlet weak var abovePositionConstraint: NSLayoutConstraint!
     @IBOutlet weak var belowPositionConstraint: NSLayoutConstraint!
     
@@ -65,12 +66,13 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
                                                selector: #selector(textDidChange(_:)),
                                                name: UITextField.textDidChangeNotification,
                                                object: passwordTextField)
-
+        
         // keyboardWillShow notification
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow(_:)),
                                                name: UITextField.keyboardWillShowNotification,
                                                object: nil)
+        
         // keyboardWillHide notification
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillHide(_:)),
@@ -80,25 +82,24 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
     
     fileprivate func LayoutPassWordTextField() {
         passwordTextField.padding.right = passwordTextField.frame.height
-                                            - 2*HIDE_PASSWORD_BUTTON_VERTICAL_OFFSET.constant
-                                            - HIDE_PASSWORD_BUTTON_HORIZONTAL_OFFSET.constant
-                                            - HIDE_BUTTON_TEXT_OFFSET
+            - 2*HIDE_PASSWORD_BUTTON_VERTICAL_OFFSET.constant
+            - HIDE_PASSWORD_BUTTON_HORIZONTAL_OFFSET.constant
+            - HIDE_BUTTON_TEXT_OFFSET
     }
     
     fileprivate func GetConstants() {
-        LOGINBUTTON_DEFAULT_MAXY = view.convert(loginButton.frame, from: loginButton.superview!).maxY
+        REGISTERBUTTON_DEFAULT_MAXY = view.convert(registerButton.frame, from: registerButton.superview!).maxY
         DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT = abovePositionConstraint.constant
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         ConformToProtocols()
         UpdateConfirmButton(if : CanConfirm())
         LayoutPassWordTextField()
         AddToNotificationObservers()
         GetConstants()
-        SetHideKeyboardWhenTapped()
     }
 
     ////////////////////////////////////////////////////
@@ -109,7 +110,7 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
             passwordTextField.becomeFirstResponder()
         } else {
             if CanConfirm() {
-                loginButton.sendActions(for: .touchUpInside)
+                registerButton.sendActions(for: .touchUpInside)
             }
         }
         return true
@@ -123,9 +124,8 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
         let keyboardFrame = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
         let newConstant = GetNewConstant(using: keyboardFrame)
         LayoutViewForKeyboard(with: newConstant)
-        
     }
-    
+
     @objc func keyboardWillHide(_ notification: Notification) {
         LayoutViewForKeyboard(with : DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT)
     }
@@ -139,10 +139,10 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
     }
     
     fileprivate func GetNewConstant(using keyboardFrame : CGRect) -> CGFloat {
-        let desiredMaxY = keyboardFrame.minY - LOGIN_BUTTON_KEYBOARD_OFFSET
+        let desiredMaxY = keyboardFrame.minY - REGISTERBUTTON_KEYBOARD_OFFSET
         return CGFloat.maximum(DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT,
-                               LOGINBUTTON_DEFAULT_MAXY - desiredMaxY
-        )
+                               REGISTERBUTTON_DEFAULT_MAXY - desiredMaxY
+                )
     }
     
     @IBAction func hideButtonPressed(_ sender: Any) {
@@ -157,26 +157,18 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.TogglePasswordVisibility()
     }
     
+    
     ////////////////////////////////////////////////////
     // MARK: - Authenticate Methods
-    fileprivate func AuthenticateWith(_ username : String, _ password : String) {
-        print("User \(username) with password \(password) wants to log in")
-    }
-
-    @IBAction func confirmPressed(_ sender: Any) {
+    @IBAction func registerPressed(_ sender: Any) {
         let username = usernameTextField.text!
         let password = passwordTextField.text!
-        AuthenticateWith(username, password)
+        RegisterWith(username, password)
         performSegue(withIdentifier: MAINAPP_SEGUE_IDENTIFIER, sender: self)
     }
-    
-    @IBAction func guestEntryPressed(_ sender: Any) {
-        performSegue(withIdentifier: MAINAPP_SEGUE_IDENTIFIER, sender: self)
-    }
-    
-    @IBAction func facebookButtonPressed(_ sender: Any) {
-        print("Signing in with facebook")
-        performSegue(withIdentifier: MAINAPP_SEGUE_IDENTIFIER, sender: self)
+
+    fileprivate func RegisterWith(_ username : String, _ password : String) {
+        print("User \(username) with password \(password) wants to log in")
     }
     
 
@@ -188,11 +180,11 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
     
     fileprivate func UpdateConfirmButton(if enabled : Bool) {
         if enabled {
-            loginButton.alpha = LOGIN_BUTTON_ENABLED_ALPHA
-            loginButton.isEnabled = true
+            registerButton.alpha = REGISTER_BUTTON_ENABLED_ALPHA
+            registerButton.isEnabled = true
         } else {
-            loginButton.alpha = LOGIN_BUTTON_DISABLED_ALPHA
-            loginButton.isEnabled = false
+            registerButton.alpha = REGISTER_BUTTON_DISABLED_ALPHA
+            registerButton.isEnabled = false
         }
     }
     
@@ -201,7 +193,5 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.resignFirstResponder()
     }
     
-    @IBAction func registerPressed(_ sender: Any) {
-        performSegue(withIdentifier: REGISTER_SEGUE_IDENTIFIER, sender: self)
-    }
 }
+

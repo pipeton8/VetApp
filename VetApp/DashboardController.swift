@@ -13,7 +13,7 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("I'm in news scene")
+        print("I'm in the dashboard")
     }
 
 

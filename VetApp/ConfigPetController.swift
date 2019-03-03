@@ -17,6 +17,8 @@ protocol ConfigPetDelegate {
 
 class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
+    // MARK: - Properties
+
     // Consts and Var
     var delegate : ConfigPetDelegate?
     
