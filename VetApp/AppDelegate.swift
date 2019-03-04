@@ -8,17 +8,30 @@
 
 import UIKit
 import Firebase
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        FBSDKApplicationDelegate.sharedInstance()?.application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        let authManager = AuthenticationManager()
+        authManager.AdvanceIfAlreadySignedIn()
+        
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        let handled : Bool = (FBSDKApplicationDelegate.sharedInstance()?.application(app,
+                                                                                     open: url,
+                                                                                     sourceApplication: options[.sourceApplication] as? String,
+                                                                                     annotation: options[.annotation]))!
+        return handled
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

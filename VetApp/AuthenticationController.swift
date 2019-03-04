@@ -8,10 +8,14 @@
 
 import UIKit
 import Firebase
+import FBSDKLoginKit
 
-class AuthenticationViewController: UIViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, UIGestureRecognizerDelegate {
-    
+class AuthenticationViewController: UIViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, UIGestureRecognizerDelegate, AuthenticationManagerDelegate {
+
     // MARK: - Properties
+    
+    // Auth manager
+    var authManager = AuthenticationManager()
 
     // Segue identifier
     let MAINAPP_SEGUE_IDENTIFIER = "goToMainApp"
@@ -23,7 +27,7 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate, UIPop
     // Username TextField
     @IBOutlet weak var emailTextField: UITextField!
 
-    // Password TextField
+    // Password TextField and Hide Password Button
     let EYE_OPEN_IMAGE_NAME = "eyeIcon"
     let EYE_CLOSED_IMAGE_NAME = "notEyeIcon"
     let HIDE_BUTTON_TEXT_OFFSET : CGFloat = 5.0
@@ -31,12 +35,19 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate, UIPop
     @IBOutlet weak var HIDE_PASSWORD_BUTTON_VERTICAL_OFFSET: NSLayoutConstraint!
     @IBOutlet weak var hidePasswordButton: UIButton!
     @IBOutlet weak var passwordTextField: UITextFieldPadding!
+    @IBOutlet weak var passwordLabel: UILabel!
 
     // Login Button
     let LOGIN_BUTTON_ENABLED_ALPHA : CGFloat = 0.8
     let LOGIN_BUTTON_DISABLED_ALPHA : CGFloat = 0.2
     @IBOutlet weak var loginButton: UIButton!
-
+    
+    // Facebook Button
+    let FB_BUTTON_DEFAULT_ALPHA : CGFloat = 1.0
+    let FB_BUTTON_HIGHLIGHT_ALPHA : CGFloat = 0.7
+    let FB_BUTTON_HIGHLIGHT_ANIM_TIME : TimeInterval = 0.15
+    @IBOutlet weak var facebookButton: UIButton!
+    
     // Keyboard layout adjustments
     let LOGIN_BUTTON_KEYBOARD_OFFSET : CGFloat = 10.0
     let LAYOUT_FOR_KEYBOARD_ANIM_TIME : TimeInterval = 0.15
@@ -46,22 +57,31 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate, UIPop
     @IBOutlet weak var abovePositionConstraint: NSLayoutConstraint!
     @IBOutlet weak var belowPositionConstraint: NSLayoutConstraint!
     
-    // E-mail alert PopOver
-    let RED_ALERT_IDENTIFIER : String = "RedAlertPop"
-    @IBOutlet weak var alertAnchor: UIView!
-    
-    // Password alert
-    let NUMBER_OF_PASSWORD_SHAKES : Float = 3
-    let PASSWORD_SHAKE_ANIM_TIME : TimeInterval = 0.15
-    let PASSWORD_SHAKE_HORIZONTAL_MOVEMENT : CGFloat = 5
-    @IBOutlet weak var passwordLabel: UILabel!
-    
     ////////////////////////////////////////////////////
-    //MARK: - viewDidLoad and viewWillLoad methods
+    //MARK: - viewDidLoad methods    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        ConfigureAuthManager()
+        ConformToProtocols()
+        UpdateConfirmButton(if : CanConfirm())
+        LayoutPassWordTextField()
+        AddToNotificationObservers()
+        GetConstants()
+        SetHideKeyboardWhenTapped()
+    }
+    
+    fileprivate func ConfigureAuthManager() {
+        authManager.emailTextField = emailTextField
+        authManager.passwordTextField = passwordTextField
+        authManager.passwordLabel = passwordLabel
+        authManager.CleanAlerts(passwordErrorCode: .wrongPassword)
+    }
     
     fileprivate func ConformToProtocols() {
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        authManager.delegate = self
     }
     
     fileprivate func AddToNotificationObservers() {
@@ -102,24 +122,20 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate, UIPop
         currentConstraintConstant = DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT
     }
     
-    fileprivate func HidePasswordLabel() {
-        passwordLabel.textColor = UIColor.flatMint()
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        ConformToProtocols()
-        UpdateConfirmButton(if : CanConfirm())
-        LayoutPassWordTextField()
-        AddToNotificationObservers()
-        GetConstants()
-        SetHideKeyboardWhenTapped()
-        HidePasswordLabel()
-    }
-
     ////////////////////////////////////////////////////
     // MARK: - Textfield Methods
+    @IBAction func hideButtonPressed(_ sender: Any) {
+        var newImage : UIImage
+        
+        if passwordTextField.isSecureTextEntry {
+            newImage = UIImage(named: EYE_OPEN_IMAGE_NAME)!
+        } else {
+            newImage = UIImage(named: EYE_CLOSED_IMAGE_NAME)!
+        }
+        hidePasswordButton.setImage(newImage, for: .normal)
+        passwordTextField.TogglePasswordVisibility()
+    }
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField.isSecureTextEntry { textField.PreventSecureEntryClearing() }
     }
@@ -170,116 +186,36 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate, UIPop
                                LOGINBUTTON_DEFAULT_MAXY - desiredMaxY
         )
     }
-    
-    @IBAction func hideButtonPressed(_ sender: Any) {
-        var newImage : UIImage
-        
-        if passwordTextField.isSecureTextEntry {
-            newImage = UIImage(named: EYE_OPEN_IMAGE_NAME)!
-        } else {
-            newImage = UIImage(named: EYE_CLOSED_IMAGE_NAME)!
-        }
-        hidePasswordButton.setImage(newImage, for: .normal)
-        passwordTextField.TogglePasswordVisibility()
-    }
-    
+
     ////////////////////////////////////////////////////
     // MARK: - Authenticate Methods
-    fileprivate func AuthenticateWith(_ email : String, _ password : String, _ onCompletion : @escaping (Error?, Bool) -> Void ) {
-        Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
-            let success = error == nil
-            onCompletion(error, success)
-        }
-    }
-    
-    fileprivate func CleanAlerts() {
-        self.presentedViewController?.dismiss(animated: true, completion: nil)
-        passwordLabel.textColor = UIColor.flatMint()
-    }
-    
-    fileprivate func AlertErrorInAuth(withCode code : AuthErrorCode) {
-        switch code {
-        case .tooManyRequests:
-            ShowPopup(withText: "Too many invalid tries. Try again after some time.")
-        case .invalidEmail:
-            ShowAlert(withText: "The e-mail is not valid")
-        case .userDisabled:
-            ShowAlert(withText: "This account has been disabled")
-        case .userNotFound:
-            ShowAlert(withText: "This e-mail is not registered")
-        case .wrongPassword:
-            ShowPasswordAlert()
-        default:
-            break
-        }
-    }
-
-    fileprivate func ShowPopup(withText text : String) {
-        let alert = UIAlertController(title: nil, message: text, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK!", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    fileprivate func ShowAlert(withText text : String) {
-        // instantiate
-        let alertVC = RedAlertPop.init(nibName: RED_ALERT_IDENTIFIER, bundle: nil)
-        
-        // configure alertVC
-        alertVC.alertText = text
-        alertVC.modalPresentationStyle = .popover
-        
-        // configure appearance
-        let popoverController = alertVC.popoverPresentationController!
-        popoverController.delegate = self
-        popoverController.backgroundColor = UIColor.flatRed()
-        popoverController.passthroughViews = [view, ]
-        popoverController.permittedArrowDirections = .down
-        popoverController.sourceView = emailTextField
-        popoverController.sourceRect = emailTextField.bounds.applying(CGAffineTransform(translationX: 0, y: -2))
-        
-        // display
-        present(alertVC, animated: true, completion: nil)
-    }
-    
-    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        return .none
-    }
-
-    fileprivate func ShowPasswordAlert() {
-        passwordLabel.textColor = UIColor.flatRed()
-        passwordLabel.shake(times: NUMBER_OF_PASSWORD_SHAKES, duration: PASSWORD_SHAKE_ANIM_TIME, displacement: PASSWORD_SHAKE_HORIZONTAL_MOVEMENT)
-    }
-
     @IBAction func confirmPressed(_ sender: Any) {
-        let username = emailTextField.text!
+        let email = emailTextField.text!
         let password = passwordTextField.text!
-        CleanAlerts()
-        AuthenticateWith(username, password) { (error,success) in
-            if success {
-                self.performSegue(withIdentifier: self.MAINAPP_SEGUE_IDENTIFIER, sender: self)
-            } else {
-                print("error code: \(error!._code)")
-                self.AlertErrorInAuth(withCode : AuthErrorCode(rawValue: error!._code)!)
-            }
-        }
+        authManager.CleanAlerts(passwordErrorCode: .wrongPassword)
+        authManager.AuthenticateWith(email, password)
     }
     
     @IBAction func guestEntryPressed(_ sender: Any) {
         performSegue(withIdentifier: MAINAPP_SEGUE_IDENTIFIER, sender: self)
     }
     
-    @IBAction func facebookButtonPressed(_ sender: Any) {
-        print("Signing in with facebook")
-        performSegue(withIdentifier: MAINAPP_SEGUE_IDENTIFIER, sender: self)
-    }
-    
-
     ////////////////////////////////////////////////////
-    // MARK: - Views Navigation Methods
-    fileprivate func CanConfirm() -> Bool {
-        return emailTextField.text! != "" && passwordTextField.text! != ""
+    // MARK: - Facebook Authentication methods
+    @IBAction func facebookButtonPressed(_ sender: Any) {
+        HighLightFBButton()
+        authManager.LogInWithFacebook()
     }
     
+    fileprivate func HighLightFBButton() {
+        facebookButton.alpha = FB_BUTTON_HIGHLIGHT_ALPHA
+        UIView.animate(withDuration: FB_BUTTON_HIGHLIGHT_ANIM_TIME) {
+            self.facebookButton.alpha = self.FB_BUTTON_DEFAULT_ALPHA
+        }
+    }
+    
+    ////////////////////////////////////////////////////
+    // MARK: - Login Button Auxiliary Methods
     fileprivate func UpdateConfirmButton(if enabled : Bool) {
         if enabled {
             loginButton.alpha = LOGIN_BUTTON_ENABLED_ALPHA
@@ -289,24 +225,44 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate, UIPop
             loginButton.isEnabled = false
         }
     }
-    
-    fileprivate func DismissKeyboard() {
-        emailTextField.resignFirstResponder()
-        passwordTextField.resignFirstResponder()
+
+    fileprivate func CanConfirm() -> Bool {
+        return emailTextField.text! != "" && passwordTextField.text! != ""
     }
     
+    ////////////////////////////////////////////////////
+    // MARK: - Views Navigation Methods
     @IBAction func registerPressed(_ sender: Any) {
         presentedViewController?.dismiss(animated: true, completion: nil)
         performSegue(withIdentifier: REGISTER_SEGUE_IDENTIFIER, sender: self)
     }
     
     ////////////////////////////////////////////////////
+    // MARK: - Auth Manager Delegate Methods
+    func UserDidSignIn() {
+        performSegue(withIdentifier: MAINAPP_SEGUE_IDENTIFIER, sender: self)
+    }
+    
+    func ShowAlert(vc: UIViewController?, popup: UIAlertController?) {
+        if let _ = vc { present(vc!, animated: true, completion: nil) }
+        if let _ = popup { present(popup!, animated: true, completion: nil) }
+    }
+    
+    func DismissAlertsVC() {
+        self.presentedViewController?.dismiss(animated: true, completion: nil)
+    }
+
+    ////////////////////////////////////////////////////
     // MARK: - Gesture Recognizer delegate methods
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if let viewTouched = touch.view, viewTouched.isEqual(hidePasswordButton) {
-            return false
-        }
+        if let viewTouched = touch.view, viewTouched.isEqual(hidePasswordButton) { return false }
         return true
     }
 
+    ////////////////////////////////////////////////////
+    // MARK: - Miscellaneous Methods
+    fileprivate func DismissKeyboard() {
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+    }
 }
