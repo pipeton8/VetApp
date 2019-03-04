@@ -11,7 +11,8 @@ import UIKit
 class RedAlertPop: UIViewController {
 
     // MARK: - Properties
-
+    let ALERT_HEIGHT : CGFloat = 30.0
+    let TEXT_HORIZONTAL_OFFSET : CGFloat = 10.0
     var alertText : String = "Placeholder alert text"
     @IBOutlet weak var alertLabel: UILabel!
     
@@ -21,20 +22,16 @@ class RedAlertPop: UIViewController {
         alertLabel.text = alertText
     }
     
+    fileprivate func SetViewSize() {
+        view.layoutIfNeeded()
+        preferredContentSize = CGSize(width: alertLabel.frame.maxX + TEXT_HORIZONTAL_OFFSET, height: ALERT_HEIGHT)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         SetAlertLabel(with : alertText)
+        SetViewSize()
     }
-
-
-    /*
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

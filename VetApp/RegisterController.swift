@@ -45,9 +45,15 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPr
     @IBOutlet weak var abovePositionConstraint: NSLayoutConstraint!
     @IBOutlet weak var belowPositionConstraint: NSLayoutConstraint!
     
-    // Alert PopOver
+    // E-mail alert PopOver
     let RED_ALERT_IDENTIFIER : String = "RedAlertPop"
-    var alertShowing : Bool = false
+    @IBOutlet weak var alertAnchor: UIView!
+    
+    // Password alert
+    let NUMBER_OF_PASSWORD_SHAKES : Float = 4
+    let PASSWORD_SHAKE_ANIM_TIME : TimeInterval = 0.2
+    let PASSWORD_SHAKE_HORIZONTAL_MOVEMENT : CGFloat = 5
+    @IBOutlet weak var passwordLabel: UILabel!
     
     ////////////////////////////////////////////////////
     //MARK: - viewDidLoad and viewWillLoad methods
@@ -103,6 +109,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPr
         LayoutPassWordTextField()
         AddToNotificationObservers()
         GetConstants()
+        SetHideKeyboardWhenTapped()
     }
     
     ////////////////////////////////////////////////////
@@ -166,6 +173,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPr
     @IBAction func registerPressed(_ sender: Any) {
         let email = emailTextField.text!
         let password = passwordTextField.text!
+        CleanAlerts()
         RegisterWith(email, password) { (error,success) in
             if success {
                 self.performSegue(withIdentifier: self.MAINAPP_SEGUE_IDENTIFIER, sender: self)
@@ -174,20 +182,28 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPr
             }
         }
     }
+    
+    fileprivate func CleanAlerts() {
+        self.presentedViewController?.dismiss(animated: true, completion: nil)
+        passwordLabel.textColor = UIColor.darkGray
+    }
 
     fileprivate func RegisterWith(_ email : String, _ password : String, _ onCompletion : @escaping (Error?, Bool) -> Void ) {
         Auth.auth().createUser(withEmail: email, password: password) { (_, error) in
             let success = error == nil
             onCompletion(error, success)
+            
         }
     }
     
     fileprivate func AlertErrorInAuth(withCode code : AuthErrorCode) {
         switch code {
         case .invalidEmail:
-            ShowAlert(withText: "E-mail is not valid.")
+            ShowAlert(withText: "E-mail is not valid")
         case .emailAlreadyInUse:
-            ShowAlert(withText: "E-mail is already in use.")
+            ShowAlert(withText: "E-mail is already in use")
+        case .weakPassword:
+            ShowPasswordAlert()
         default:
             break
         }
@@ -195,22 +211,21 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPr
     
     fileprivate func ShowAlert(withText text : String) {
         // instantiate
-        alertShowing = true
         let alertVC = RedAlertPop.init(nibName: RED_ALERT_IDENTIFIER, bundle: nil)
         
-        // configure appearance
+        // configure alertVC
+        alertVC.alertText = text
         alertVC.modalPresentationStyle = .popover
-        alertVC.preferredContentSize = CGSize(width: emailTextField.bounds.width, height: 30)
+        
+        // configure appearance
         let popoverController = alertVC.popoverPresentationController!
         popoverController.delegate = self
         popoverController.backgroundColor = UIColor.flatRed()
+        popoverController.passthroughViews = [view]
         popoverController.permittedArrowDirections = .down
-        popoverController.sourceView = emailTextField.superview
-        popoverController.sourceRect = emailTextField.bounds
+        popoverController.sourceView = alertAnchor
+        popoverController.sourceRect = alertAnchor.bounds
         
-        // set text
-        alertVC.alertText = text
-
         // display
         present(alertVC, animated: true, completion: nil)
     }
@@ -219,6 +234,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPr
         return .none
     }
     
+    fileprivate func ShowPasswordAlert() {
+        passwordLabel.textColor = UIColor.flatRed()
+        passwordLabel.shake(times: NUMBER_OF_PASSWORD_SHAKES, duration: PASSWORD_SHAKE_ANIM_TIME, displacement: PASSWORD_SHAKE_HORIZONTAL_MOVEMENT)
+    }
 
     ////////////////////////////////////////////////////
     // MARK: - Views Navigation Methods

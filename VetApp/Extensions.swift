@@ -117,3 +117,16 @@ extension UIViewController {
         view.endEditing(true)
     }
 }
+
+extension UIView {
+    
+    func shake(times repeatTimes : Float, duration : TimeInterval, displacement : CGFloat) {
+        let animation : CABasicAnimation = CABasicAnimation(keyPath: "position")
+        animation.repeatCount = repeatTimes
+        animation.duration = duration/TimeInterval(repeatTimes)
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: center.x - displacement, y: center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: center.x + displacement, y: center.y))
+        layer.add(animation, forKey: "position")
+    }
+}
