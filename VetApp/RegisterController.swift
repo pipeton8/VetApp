@@ -42,6 +42,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPr
     let LAYOUT_FOR_KEYBOARD_ANIM_TIME : TimeInterval = 0.15
     var REGISTERBUTTON_DEFAULT_MAXY : CGFloat = 0.0 // must be fetched on viewDidLoad
     var DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT : CGFloat = 0.0 // must be fetched on viewDidLoad
+    var currentConstraintConstant : CGFloat = 0.0 // must be fetched on viewDidLoad
     @IBOutlet weak var abovePositionConstraint: NSLayoutConstraint!
     @IBOutlet weak var belowPositionConstraint: NSLayoutConstraint!
     
@@ -50,8 +51,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPr
     @IBOutlet weak var alertAnchor: UIView!
     
     // Password alert
-    let NUMBER_OF_PASSWORD_SHAKES : Float = 4
-    let PASSWORD_SHAKE_ANIM_TIME : TimeInterval = 0.2
+    let NUMBER_OF_PASSWORD_SHAKES : Float = 3
+    let PASSWORD_SHAKE_ANIM_TIME : TimeInterval = 0.15
     let PASSWORD_SHAKE_HORIZONTAL_MOVEMENT : CGFloat = 5
     @IBOutlet weak var passwordLabel: UILabel!
     
@@ -99,6 +100,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPr
     fileprivate func GetConstants() {
         REGISTERBUTTON_DEFAULT_MAXY = view.convert(registerButton.frame, from: registerButton.superview!).maxY
         DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT = abovePositionConstraint.constant
+        currentConstraintConstant = DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT
     }
     
     override func viewDidLoad() {
@@ -114,6 +116,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPr
     
     ////////////////////////////////////////////////////
     // MARK: - Textfield Methods
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField.isSecureTextEntry { textField.PreventSecureEntryClearing() }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
         if textField == emailTextField {
@@ -133,11 +139,17 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPr
     @objc func keyboardWillShow(_ notification : Notification) {
         let keyboardFrame = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
         let newConstant = GetNewConstant(using: keyboardFrame)
-        LayoutViewForKeyboard(with: newConstant)
+        if currentConstraintConstant != newConstant {
+            LayoutViewForKeyboard(with: newConstant)
+            currentConstraintConstant = newConstant
+        }
     }
 
     @objc func keyboardWillHide(_ notification: Notification) {
-        LayoutViewForKeyboard(with : DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT)
+        if currentConstraintConstant != DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT {
+            LayoutViewForKeyboard(with: DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT)
+            currentConstraintConstant = DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT
+        }
     }
     
     fileprivate func LayoutViewForKeyboard(with constant : CGFloat) {
@@ -178,6 +190,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPr
             if success {
                 self.performSegue(withIdentifier: self.MAINAPP_SEGUE_IDENTIFIER, sender: self)
             } else {
+                print("error code: \(error!._code)")
                 self.AlertErrorInAuth(withCode : AuthErrorCode(rawValue: error!._code)!)
             }
         }
@@ -223,8 +236,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPr
         popoverController.backgroundColor = UIColor.flatRed()
         popoverController.passthroughViews = [view]
         popoverController.permittedArrowDirections = .down
-        popoverController.sourceView = alertAnchor
-        popoverController.sourceRect = alertAnchor.bounds
+        popoverController.sourceView = emailTextField
+        popoverController.sourceRect = emailTextField.bounds.applying(CGAffineTransform(translationX: 0, y: -2))
         
         // display
         present(alertVC, animated: true, completion: nil)
@@ -260,5 +273,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPr
         passwordTextField.resignFirstResponder()
     }
     
+    @IBAction func backPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 

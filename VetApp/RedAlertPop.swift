@@ -12,7 +12,7 @@ class RedAlertPop: UIViewController {
 
     // MARK: - Properties
     let ALERT_HEIGHT : CGFloat = 30.0
-    let TEXT_HORIZONTAL_OFFSET : CGFloat = 10.0
+    let TEXT_HORIZONTAL_OFFSET : CGFloat = 15.0
     var alertText : String = "Placeholder alert text"
     @IBOutlet weak var alertLabel: UILabel!
     

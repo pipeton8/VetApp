@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class AuthenticationViewController: UIViewController, UITextFieldDelegate {
+class AuthenticationViewController: UIViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, UIGestureRecognizerDelegate {
     
     // MARK: - Properties
 
@@ -42,8 +42,19 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
     let LAYOUT_FOR_KEYBOARD_ANIM_TIME : TimeInterval = 0.15
     var LOGINBUTTON_DEFAULT_MAXY : CGFloat = 0.0 // must be fetched on viewDidLoad
     var DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT : CGFloat = 0.0 // must be fetched on viewDidLoad
+    var currentConstraintConstant : CGFloat = 0.0 // must be fetched on viewDidLoad
     @IBOutlet weak var abovePositionConstraint: NSLayoutConstraint!
     @IBOutlet weak var belowPositionConstraint: NSLayoutConstraint!
+    
+    // E-mail alert PopOver
+    let RED_ALERT_IDENTIFIER : String = "RedAlertPop"
+    @IBOutlet weak var alertAnchor: UIView!
+    
+    // Password alert
+    let NUMBER_OF_PASSWORD_SHAKES : Float = 3
+    let PASSWORD_SHAKE_ANIM_TIME : TimeInterval = 0.15
+    let PASSWORD_SHAKE_HORIZONTAL_MOVEMENT : CGFloat = 5
+    @IBOutlet weak var passwordLabel: UILabel!
     
     ////////////////////////////////////////////////////
     //MARK: - viewDidLoad and viewWillLoad methods
@@ -88,6 +99,11 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
     fileprivate func GetConstants() {
         LOGINBUTTON_DEFAULT_MAXY = view.convert(loginButton.frame, from: loginButton.superview!).maxY
         DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT = abovePositionConstraint.constant
+        currentConstraintConstant = DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT
+    }
+    
+    fileprivate func HidePasswordLabel() {
+        passwordLabel.textColor = UIColor.flatMint()
     }
 
     override func viewDidLoad() {
@@ -99,10 +115,15 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
         AddToNotificationObservers()
         GetConstants()
         SetHideKeyboardWhenTapped()
+        HidePasswordLabel()
     }
 
     ////////////////////////////////////////////////////
     // MARK: - Textfield Methods
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField.isSecureTextEntry { textField.PreventSecureEntryClearing() }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
         if textField == emailTextField {
@@ -122,12 +143,17 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
     @objc func keyboardWillShow(_ notification : Notification) {
         let keyboardFrame = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
         let newConstant = GetNewConstant(using: keyboardFrame)
-        LayoutViewForKeyboard(with: newConstant)
-        
+        if newConstant != currentConstraintConstant {
+            LayoutViewForKeyboard(with: newConstant)
+            currentConstraintConstant = newConstant
+        }
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
-        LayoutViewForKeyboard(with : DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT)
+        if DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT != currentConstraintConstant {
+            LayoutViewForKeyboard(with: DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT)
+            currentConstraintConstant = DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT
+        }
     }
     
     fileprivate func LayoutViewForKeyboard(with constant : CGFloat) {
@@ -159,15 +185,83 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
     
     ////////////////////////////////////////////////////
     // MARK: - Authenticate Methods
-    fileprivate func AuthenticateWith(_ username : String, _ password : String) {
-        print("User \(username) with password \(password) wants to log in")
+    fileprivate func AuthenticateWith(_ email : String, _ password : String, _ onCompletion : @escaping (Error?, Bool) -> Void ) {
+        Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
+            let success = error == nil
+            onCompletion(error, success)
+        }
+    }
+    
+    fileprivate func CleanAlerts() {
+        self.presentedViewController?.dismiss(animated: true, completion: nil)
+        passwordLabel.textColor = UIColor.flatMint()
+    }
+    
+    fileprivate func AlertErrorInAuth(withCode code : AuthErrorCode) {
+        switch code {
+        case .tooManyRequests:
+            ShowPopup(withText: "Too many invalid tries. Try again after some time.")
+        case .invalidEmail:
+            ShowAlert(withText: "The e-mail is not valid")
+        case .userDisabled:
+            ShowAlert(withText: "This account has been disabled")
+        case .userNotFound:
+            ShowAlert(withText: "This e-mail is not registered")
+        case .wrongPassword:
+            ShowPasswordAlert()
+        default:
+            break
+        }
+    }
+
+    fileprivate func ShowPopup(withText text : String) {
+        let alert = UIAlertController(title: nil, message: text, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK!", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    fileprivate func ShowAlert(withText text : String) {
+        // instantiate
+        let alertVC = RedAlertPop.init(nibName: RED_ALERT_IDENTIFIER, bundle: nil)
+        
+        // configure alertVC
+        alertVC.alertText = text
+        alertVC.modalPresentationStyle = .popover
+        
+        // configure appearance
+        let popoverController = alertVC.popoverPresentationController!
+        popoverController.delegate = self
+        popoverController.backgroundColor = UIColor.flatRed()
+        popoverController.passthroughViews = [view, ]
+        popoverController.permittedArrowDirections = .down
+        popoverController.sourceView = emailTextField
+        popoverController.sourceRect = emailTextField.bounds.applying(CGAffineTransform(translationX: 0, y: -2))
+        
+        // display
+        present(alertVC, animated: true, completion: nil)
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
+    }
+
+    fileprivate func ShowPasswordAlert() {
+        passwordLabel.textColor = UIColor.flatRed()
+        passwordLabel.shake(times: NUMBER_OF_PASSWORD_SHAKES, duration: PASSWORD_SHAKE_ANIM_TIME, displacement: PASSWORD_SHAKE_HORIZONTAL_MOVEMENT)
     }
 
     @IBAction func confirmPressed(_ sender: Any) {
         let username = emailTextField.text!
         let password = passwordTextField.text!
-        AuthenticateWith(username, password)
-        performSegue(withIdentifier: MAINAPP_SEGUE_IDENTIFIER, sender: self)
+        CleanAlerts()
+        AuthenticateWith(username, password) { (error,success) in
+            if success {
+                self.performSegue(withIdentifier: self.MAINAPP_SEGUE_IDENTIFIER, sender: self)
+            } else {
+                print("error code: \(error!._code)")
+                self.AlertErrorInAuth(withCode : AuthErrorCode(rawValue: error!._code)!)
+            }
+        }
     }
     
     @IBAction func guestEntryPressed(_ sender: Any) {
@@ -202,6 +296,17 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func registerPressed(_ sender: Any) {
+        presentedViewController?.dismiss(animated: true, completion: nil)
         performSegue(withIdentifier: REGISTER_SEGUE_IDENTIFIER, sender: self)
     }
+    
+    ////////////////////////////////////////////////////
+    // MARK: - Gesture Recognizer delegate methods
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if let viewTouched = touch.view, viewTouched.isEqual(hidePasswordButton) {
+            return false
+        }
+        return true
+    }
+
 }

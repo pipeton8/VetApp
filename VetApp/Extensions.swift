@@ -89,7 +89,10 @@ class UITextFieldPadding : UITextField {
 extension UITextField {
     func TogglePasswordVisibility() {
         isSecureTextEntry.toggle()
-        
+        PreventSecureEntryClearing()        
+    }
+    
+    func PreventSecureEntryClearing() {
         if let existingText = text, isSecureTextEntry {
             
             deleteBackward()
@@ -110,6 +113,7 @@ extension UIViewController {
     func SetHideKeyboardWhenTapped() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
+        tap.delegate = self as? UIGestureRecognizerDelegate
         view.addGestureRecognizer(tap)
     }
     
