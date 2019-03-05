@@ -32,7 +32,6 @@
 		B678993122277CE80097530C /* FredokaOne-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B678992F22277CE70097530C /* FredokaOne-Regular.otf */; };
 		B678993222277CE80097530C /* Fredoka dingbats.otf in Resources */ = {isa = PBXBuildFile; fileRef = B678993022277CE80097530C /* Fredoka dingbats.otf */; };
 		B681EFD4221B3D8500661118 /* ConfigPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B681EFD3221B3D8500661118 /* ConfigPetController.swift */; };
-		B69E46B6222849E4005A0880 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E46B5222849E4005A0880 /* User.swift */; };
 		B6D75A1B22272BB40051193D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6D75A1A22272BB30051193D /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -67,7 +66,6 @@
 		B678993022277CE80097530C /* Fredoka dingbats.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredoka dingbats.otf"; sourceTree = "<group>"; };
 		B681EFD3221B3D8500661118 /* ConfigPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPetController.swift; sourceTree = "<group>"; };
 		B69E46B422284953005A0880 /* VetApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VetApp.entitlements; sourceTree = "<group>"; };
-		B69E46B5222849E4005A0880 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B6D75A1A22272BB30051193D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C3EF37773E16A7B4A8B41595 /* Pods_VetApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VetApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4AFCDCE617D39C73118DCD3 /* Pods-VetApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VetApp.release.xcconfig"; path = "Target Support Files/Pods-VetApp/Pods-VetApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -149,7 +147,6 @@
 			children = (
 				B6035244221A61CB0070583B /* SpeciesRaces.swift */,
 				B6035242221A603F0070583B /* Pet.swift */,
-				B69E46B5222849E4005A0880 /* User.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -428,7 +425,6 @@
 				B6773FFF2229E83C008F8BF2 /* RegisterController.swift in Sources */,
 				B681EFD4221B3D8500661118 /* ConfigPetController.swift in Sources */,
 				B62C4F642225EA4E00B98C82 /* AuthenticationController.swift in Sources */,
-				B69E46B6222849E4005A0880 /* User.swift in Sources */,
 				B62C4F5E2224DAF100B98C82 /* CameraHandler.swift in Sources */,
 				B62877B8222DBA990018EFEC /* AuthenticationManager.swift in Sources */,
 				B62C4F5C222444B200B98C82 /* Extensions.swift in Sources */,

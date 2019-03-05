@@ -9,6 +9,7 @@
 // TODO: Review Image inputs and storage
 
 import UIKit
+import Firebase
 
 protocol ConfigPetDelegate {
     func PetAdded(newPet : Pet)
@@ -185,6 +186,48 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     //////////////////////////////////////////////////////////////
     
     // MARK: - PickerView-related methods and actions
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1 // Species and Race only have 1 component
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == speciesPicker {
+            return Species.allCases.count + 1
+        } else { // if pickerView == racePicker {
+            let rowSelectedInSpecies = speciesPicker.selectedRow(inComponent: 0)
+            if rowSelectedInSpecies == 0 {
+                return 1
+            } else {
+                let speciesSelected = Species.allCases[rowSelectedInSpecies-1]
+                let racesInSpecies = Species.GetRacesIn(speciesSelected)
+                return racesInSpecies.count + 1
+            }
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == speciesPicker {
+            return SpeciesPickerTitle(for : row)
+        } else { // if pickerView == racePicker {
+            return RacePickerTitle(for : row)
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        var titleToSet = ""
+        if pickerView == speciesPicker {
+            titleToSet = SpeciesPickerTitle(for : row)
+            if titleToSet != DEFAULT_SPECIES_PICKER_TEXT { UpdateRaceButton(enabled: true) }
+            else { UpdateRaceButton(enabled: false) }
+            speciesButton.setTitle(titleToSet, for: .normal)
+            racePicker.reloadAllComponents()
+        } else if pickerView == racePicker {
+            titleToSet = RacePickerTitle(for : row)
+            raceButton.setTitle(titleToSet, for: .normal)
+        }
+        UpdateFinishButton()
+    }
+
     fileprivate func AnimatePickerView(_ pickerView : UIPickerView, hide : Bool) {
         var pickerConstant : CGFloat = 0.0
         var thirdRowConstant : CGFloat = 0.0
@@ -219,52 +262,12 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     fileprivate func RacePickerTitle(for row: Int) -> String {
         let rowInSpeciesPicker = speciesPicker.selectedRow(inComponent: 0)
-        if rowInSpeciesPicker == 0 { return DEFAULT_RACE_PICKER_TEXT }
+        if rowInSpeciesPicker == 0 || row == 0 { return DEFAULT_RACE_PICKER_TEXT }
         let speciesSelected = Species.allCases[rowInSpeciesPicker-1]
-        return Species.GetRacesIn(speciesSelected)[row]
+        return Species.GetRacesIn(speciesSelected)[row-1]
     }
     
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1 // Species and Race only have 1 component
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView == speciesPicker {
-            return Species.allCases.count + 1
-        } else { // if pickerView == racePicker {
-            let rowSelectedInSpecies = speciesPicker.selectedRow(inComponent: 0)
-            if rowSelectedInSpecies == 0 {
-                return 1
-            } else {
-                let speciesSelected = Species.allCases[rowSelectedInSpecies-1]
-                let racesInSpecies = Species.GetRacesIn(speciesSelected)
-                return racesInSpecies.count
-            }
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView == speciesPicker {
-            return SpeciesPickerTitle(for : row)
-        } else { // if pickerView == racePicker {
-            return RacePickerTitle(for : row)
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        var titleToSet = ""
-        if pickerView == speciesPicker {
-            titleToSet = SpeciesPickerTitle(for : row)
-            if titleToSet != DEFAULT_SPECIES_PICKER_TEXT { UpdateRaceButton(enabled: true) }
-            else { UpdateRaceButton(enabled: false) }
-            speciesButton.setTitle(titleToSet, for: .normal)
-            racePicker.reloadAllComponents()
-        } else if pickerView == racePicker {
-            titleToSet = RacePickerTitle(for : row)
-            raceButton.setTitle(titleToSet, for: .normal)
-        }
-        UpdateFinishButton()
-    }
+
     
     @IBAction func speciesRacePressed(_ sender: Any) {
         HideEverythingExcept(this: speciesPicker)
@@ -310,48 +313,6 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     //////////////////////////////////////////////////////////////
     
     // MARK: - Finish adding methods
-    func GetImagePath() {
-        let imageName = petConfigured!.ID
-        imagePath = "\(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])/\(imageName).png"
-    }
-
-    func SaveImage() {
-        let imageUrl: URL = URL(fileURLWithPath: imagePath)
-        if let image = imageToStore {
-            try? image.pngData()?.write(to: imageUrl)
-            print("Saved!")
-            print(imageUrl)
-        }
-    }
-    
-    func CreatePet() -> Pet {
-        let dateOfBirth : Date = dateOfBirthFormatter.date(from: dateOfBirthLabel.text!)!
-        var raceName = ""
-        if raceButton.titleLabel!.text! == DEFAULT_RACE_PICKER_TEXT {
-            raceName = "Unknown"
-        } else {
-            raceName = raceButton.titleLabel!.text!
-        }
-        
-        let petDict : [String : Any] = [
-            "name"        : nameTextField.text ?? "",
-            "species"     : speciesButton.titleLabel!.text ?? Species.none,
-            "race"        : raceName,
-            "dateOfBirth" : Int(dateOfBirth.timeIntervalSinceReferenceDate),
-            "chipNumber"  : Int(chipNumberTextField.text ?? "-1") ?? -1,
-            "imagePath"   : imagePath ]
-        
-        var id = ""
-        
-        if editMode {
-            id = petToEdit.ID
-        } else {
-            id = String(Date.timeIntervalSinceReferenceDate) + nameTextField.text! + String(Int.random(in: 0..<Int.max))
-        }
-        
-        return Pet(dictionary: petDict, id : id)
-    }
-    
     @IBAction func finishButtonPressed(_ sender: Any) {
         petConfigured = CreatePet()
         GetImagePath()
@@ -365,9 +326,47 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     @IBAction func backPressed(_ sender: Any) {
         dismiss(animated: true)
     }
+
+    func CreatePet() -> Pet {
+        let dateOfBirth : Date = dateOfBirthFormatter.date(from: dateOfBirthLabel.text!)!
+        var raceName = ""
+        if raceButton.titleLabel!.text! == DEFAULT_RACE_PICKER_TEXT {
+            raceName = "Unknown"
+        } else {
+            raceName = raceButton.titleLabel!.text!
+        }
+        
+        var petDict : [String : Any] = [
+            PetProperties.name.rawValue        : nameTextField.text ?? "",
+            PetProperties.species.rawValue     : speciesButton.titleLabel!.text ?? Species.none,
+            PetProperties.race.rawValue        : raceName,
+            PetProperties.dateOfBirth.rawValue : Int(dateOfBirth.timeIntervalSinceReferenceDate),
+            PetProperties.chipNumber.rawValue  : Int(chipNumberTextField.text ?? "-1") ?? -1,
+            PetProperties.imagePath.rawValue   : imagePath,
+            ]
+        
+        if editMode {
+            petDict[PetProperties.owners.rawValue] = petToEdit.owners
+            return Pet(dictionary: petDict, id : petToEdit.ID)
+        } else {
+            petDict[PetProperties.owners.rawValue] = [Auth.auth().currentUser?.email!]
+            return Pet(dictionary: petDict)
+        }
+    }
+    
+    func GetImagePath() {
+        let imageName = petConfigured!.ID
+        imagePath = "\(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])/\(imageName).png"
+    }
+
+    func SaveImage() {
+        let imageUrl: URL = URL(fileURLWithPath: imagePath)
+        if let image = imageToStore {
+            try? image.pngData()?.write(to: imageUrl)
+        }
+    }
     
     //////////////////////////////////////////////////////////////
-    
     // MARK: - Other Methods
     func HideEverythingExcept(this object : Any?) {
         if object as? UITextField != nameTextField { nameTextField.resignFirstResponder() }
