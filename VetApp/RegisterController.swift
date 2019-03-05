@@ -10,12 +10,16 @@ import UIKit
 import Firebase
 import ChameleonFramework
 
-class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate {
+class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, UIGestureRecognizerDelegate, AuthenticationManagerDelegate {
     
     // MARK: - Properties
 
+    // Auth manager
+    var authManager = AuthenticationManager()
+    
     // Segue identifier
     let MAINAPP_SEGUE_IDENTIFIER = "goToMainApp"
+    
     
     // Logo ImageView
     @IBOutlet weak var logoImageView: UIImageView!
@@ -31,7 +35,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPr
     @IBOutlet weak var HIDE_PASSWORD_BUTTON_VERTICAL_OFFSET: NSLayoutConstraint!
     @IBOutlet weak var hidePasswordButton: UIButton!
     @IBOutlet weak var passwordTextField: UITextFieldPadding!
-    
+    @IBOutlet weak var passwordLabel: UILabel!
+
     // Register Button
     let REGISTER_BUTTON_ENABLED_ALPHA : CGFloat = 0.8
     let REGISTER_BUTTON_DISABLED_ALPHA : CGFloat = 0.2
@@ -46,22 +51,30 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPr
     @IBOutlet weak var abovePositionConstraint: NSLayoutConstraint!
     @IBOutlet weak var belowPositionConstraint: NSLayoutConstraint!
     
-    // E-mail alert PopOver
-    let RED_ALERT_IDENTIFIER : String = "RedAlertPop"
-    @IBOutlet weak var alertAnchor: UIView!
-    
-    // Password alert
-    let NUMBER_OF_PASSWORD_SHAKES : Float = 3
-    let PASSWORD_SHAKE_ANIM_TIME : TimeInterval = 0.15
-    let PASSWORD_SHAKE_HORIZONTAL_MOVEMENT : CGFloat = 5
-    @IBOutlet weak var passwordLabel: UILabel!
-    
     ////////////////////////////////////////////////////
     //MARK: - viewDidLoad and viewWillLoad methods
-
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        ConfigureAuthManager()
+        ConformToProtocols()
+        UpdateConfirmButton(if : CanConfirm())
+        LayoutPassWordTextField()
+        AddToNotificationObservers()
+        GetConstants()
+        SetHideKeyboardWhenTapped()
+    }
+    
+    fileprivate func ConfigureAuthManager() {
+        authManager.emailTextField = emailTextField
+        authManager.passwordTextField = passwordTextField
+        authManager.passwordLabel = passwordLabel
+    }
+    
     fileprivate func ConformToProtocols() {
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        authManager.delegate = self
     }
     
     fileprivate func AddToNotificationObservers() {
@@ -103,19 +116,20 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPr
         currentConstraintConstant = DEFAULT_ABOVEBELOW_CONSTRAINT_CONSTANT
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        ConformToProtocols()
-        UpdateConfirmButton(if : CanConfirm())
-        LayoutPassWordTextField()
-        AddToNotificationObservers()
-        GetConstants()
-        SetHideKeyboardWhenTapped()
-    }
-    
     ////////////////////////////////////////////////////
     // MARK: - Textfield Methods
+    @IBAction func hideButtonPressed(_ sender: Any) {
+        var newImage : UIImage
+        
+        if passwordTextField.isSecureTextEntry {
+            newImage = UIImage(named: EYE_OPEN_IMAGE_NAME)!
+        } else {
+            newImage = UIImage(named: EYE_CLOSED_IMAGE_NAME)!
+        }
+        hidePasswordButton.setImage(newImage, for: .normal)
+        passwordTextField.TogglePasswordVisibility()
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField.isSecureTextEntry { textField.PreventSecureEntryClearing() }
     }
@@ -167,97 +181,17 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPr
                 )
     }
     
-    @IBAction func hideButtonPressed(_ sender: Any) {
-        var newImage : UIImage
-        
-        if passwordTextField.isSecureTextEntry {
-            newImage = UIImage(named: EYE_OPEN_IMAGE_NAME)!
-        } else {
-            newImage = UIImage(named: EYE_CLOSED_IMAGE_NAME)!
-        }
-        hidePasswordButton.setImage(newImage, for: .normal)
-        passwordTextField.TogglePasswordVisibility()
-    }
-    
-    
     ////////////////////////////////////////////////////
     // MARK: - Authenticate Methods
     @IBAction func registerPressed(_ sender: Any) {
         let email = emailTextField.text!
         let password = passwordTextField.text!
-        CleanAlerts()
-        RegisterWith(email, password) { (error,success) in
-            if success {
-                self.performSegue(withIdentifier: self.MAINAPP_SEGUE_IDENTIFIER, sender: self)
-            } else {
-                print("error code: \(error!._code)")
-                self.AlertErrorInAuth(withCode : AuthErrorCode(rawValue: error!._code)!)
-            }
-        }
-    }
-    
-    fileprivate func CleanAlerts() {
-        self.presentedViewController?.dismiss(animated: true, completion: nil)
-        passwordLabel.textColor = UIColor.darkGray
-    }
-
-    fileprivate func RegisterWith(_ email : String, _ password : String, _ onCompletion : @escaping (Error?, Bool) -> Void ) {
-        Auth.auth().createUser(withEmail: email, password: password) { (_, error) in
-            let success = error == nil
-            onCompletion(error, success)
-            
-        }
-    }
-    
-    fileprivate func AlertErrorInAuth(withCode code : AuthErrorCode) {
-        switch code {
-        case .invalidEmail:
-            ShowAlert(withText: "E-mail is not valid")
-        case .emailAlreadyInUse:
-            ShowAlert(withText: "E-mail is already in use")
-        case .weakPassword:
-            ShowPasswordAlert()
-        default:
-            break
-        }
-    }
-    
-    fileprivate func ShowAlert(withText text : String) {
-        // instantiate
-        let alertVC = RedAlertPop.init(nibName: RED_ALERT_IDENTIFIER, bundle: nil)
-        
-        // configure alertVC
-        alertVC.alertText = text
-        alertVC.modalPresentationStyle = .popover
-        
-        // configure appearance
-        let popoverController = alertVC.popoverPresentationController!
-        popoverController.delegate = self
-        popoverController.backgroundColor = UIColor.flatRed()
-        popoverController.passthroughViews = [view]
-        popoverController.permittedArrowDirections = .down
-        popoverController.sourceView = emailTextField
-        popoverController.sourceRect = emailTextField.bounds.applying(CGAffineTransform(translationX: 0, y: -2))
-        
-        // display
-        present(alertVC, animated: true, completion: nil)
-    }
-    
-    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        return .none
-    }
-    
-    fileprivate func ShowPasswordAlert() {
-        passwordLabel.textColor = UIColor.flatRed()
-        passwordLabel.shake(times: NUMBER_OF_PASSWORD_SHAKES, duration: PASSWORD_SHAKE_ANIM_TIME, displacement: PASSWORD_SHAKE_HORIZONTAL_MOVEMENT)
+        authManager.CleanAlerts(passwordErrorCode: .weakPassword)
+        authManager.RegisterWith(email, password)
     }
 
     ////////////////////////////////////////////////////
-    // MARK: - Views Navigation Methods
-    fileprivate func CanConfirm() -> Bool {
-        return emailTextField.text! != "" && passwordTextField.text! != ""
-    }
-    
+    // MARK: - Register Button Methods
     fileprivate func UpdateConfirmButton(if enabled : Bool) {
         if enabled {
             registerButton.alpha = REGISTER_BUTTON_ENABLED_ALPHA
@@ -268,13 +202,43 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, UIPopoverPr
         }
     }
     
+    fileprivate func CanConfirm() -> Bool {
+        return emailTextField.text! != "" && passwordTextField.text! != ""
+    }
+    
+    ////////////////////////////////////////////////////
+    // MARK: - Views Navigation Mehods
+    @IBAction func backPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    ////////////////////////////////////////////////////
+    // MARK: - Auth Manager delegate methods
+    func UserDidAuthenticate() {
+        performSegue(withIdentifier: MAINAPP_SEGUE_IDENTIFIER, sender: self)
+    }
+    
+    func ShowAlert(vc: UIViewController) {
+        present(vc, animated: true, completion: nil)
+    }
+    
+    func DismissAlertsVC() {
+        self.presentedViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    ////////////////////////////////////////////////////
+    // MARK: - Gesture Recognizer delegate methods
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if let viewTouched = touch.view, viewTouched.isEqual(hidePasswordButton) { return false }
+        return true
+    }
+    
+    ////////////////////////////////////////////////////
+    // MARK: - Miscellaneous methods
     fileprivate func DismissKeyboard() {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
     
-    @IBAction func backPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
 }
 

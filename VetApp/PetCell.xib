@@ -22,7 +22,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xnT-k8-zlo" userLabel="Image Container">
                         <rect key="frame" x="0.0" y="0.0" width="119.5" height="119.5"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dog" translatesAutoresizingMaskIntoConstraints="NO" id="KTF-ex-Lil">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknownDog" translatesAutoresizingMaskIntoConstraints="NO" id="KTF-ex-Lil">
                                 <rect key="frame" x="10" y="10" width="99.5" height="99.5"/>
                             </imageView>
                         </subviews>
@@ -105,6 +105,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Dog" width="341" height="341"/>
+        <image name="unknownDog" width="341" height="341"/>
     </resources>
 </document>

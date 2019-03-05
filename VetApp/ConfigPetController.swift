@@ -80,7 +80,7 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     //////////////////////////////////////////////////////////////
     
-    // MARK: ViewDidLoad and ViewWillLoad overrides
+    // MARK: - ViewDidLoad and ViewWillLoad overrides
     fileprivate func ConformToProtocols() {
         speciesPicker.delegate = self
         speciesPicker.dataSource = self
@@ -155,7 +155,7 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
 
     //////////////////////////////////////////////////////////////
     
-    // MARK: Choose Picture Methods
+    // MARK: - Choose Picture Methods
     @IBAction func addPicturePressed(_ sender: Any) {
         CameraHandler.shared.showActionSheet(vc: self)
         CameraHandler.shared.imagePickedBlock = {
@@ -167,7 +167,7 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
 
     //////////////////////////////////////////////////////////////
     
-    // MARK: Textfields methods
+    // MARK: - Textfields methods
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
         textField.resignFirstResponder()
@@ -184,7 +184,7 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     //////////////////////////////////////////////////////////////
     
-    // MARK: PickerView-related methods and actions
+    // MARK: - PickerView-related methods and actions
     fileprivate func AnimatePickerView(_ pickerView : UIPickerView, hide : Bool) {
         var pickerConstant : CGFloat = 0.0
         var thirdRowConstant : CGFloat = 0.0
@@ -281,7 +281,7 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
 
     //////////////////////////////////////////////////////////////
     
-    // MARK: Date Picker methods
+    // MARK: - Date Picker methods
     func DateOfBirthPicker(hide : Bool) {
         if hide == true {
             dateOfBirthHideConstraint.constant = DATE_PICKER_HIDE_CONSTANT
@@ -309,7 +309,7 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     //////////////////////////////////////////////////////////////
     
-    // MARK: Finish adding methods
+    // MARK: - Finish adding methods
     func GetImagePath() {
         let imageName = petConfigured!.ID
         imagePath = "\(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])/\(imageName).png"
@@ -319,6 +319,8 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         let imageUrl: URL = URL(fileURLWithPath: imagePath)
         if let image = imageToStore {
             try? image.pngData()?.write(to: imageUrl)
+            print("Saved!")
+            print(imageUrl)
         }
     }
     
@@ -353,6 +355,7 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     @IBAction func finishButtonPressed(_ sender: Any) {
         petConfigured = CreatePet()
         GetImagePath()
+        petConfigured.imagePath = imagePath
         SaveImage()
         if editMode { delegate?.PetConfigured(pet: petConfigured!) }
         else { delegate?.PetAdded(newPet: petConfigured!) }
@@ -365,7 +368,7 @@ class ConfigPetViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     //////////////////////////////////////////////////////////////
     
-    // MARK: Other Methods
+    // MARK: - Other Methods
     func HideEverythingExcept(this object : Any?) {
         if object as? UITextField != nameTextField { nameTextField.resignFirstResponder() }
         if object as? UIPickerView != speciesPicker { AnimatePickerView(speciesPicker, hide: true) }

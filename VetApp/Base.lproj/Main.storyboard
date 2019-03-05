@@ -53,54 +53,6 @@
                                     <action selector="dateOfBirthPickerChanged:" destination="lQO-kc-O5s" eventType="valueChanged" id="MqF-DL-cCy"/>
                                 </connections>
                             </datePicker>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Z1-xg-dpE" userLabel="Title Container">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VetApp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4T-RS-Flw">
-                                        <rect key="frame" x="142" y="35" width="130" height="60"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="SZc-gP-zLC"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="FredokaOne-Regular" family="Fredoka One" pointSize="40"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AIg-Ki-LOY">
-                                        <rect key="frame" x="20" y="29.666666666666671" width="44" height="71"/>
-                                        <fontDescription key="fontDescription" name="Fredokadingbats" family="Fredoka dingbats" pointSize="50"/>
-                                        <inset key="titleEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="M">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="backPressed:" destination="lQO-kc-O5s" eventType="touchUpInside" id="SQS-E9-vha"/>
-                                            <segue destination="9j6-ge-w7w" kind="unwind" unwindAction="backToPetViewController:" id="aG8-vi-FXU"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0hY-a0-4Za">
-                                        <rect key="frame" x="353" y="46" width="41" height="38"/>
-                                        <fontDescription key="fontDescription" name="FredokaOne-Regular" family="Fredoka One" pointSize="22"/>
-                                        <state key="normal" title="Add">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="finishButtonPressed:" destination="lQO-kc-O5s" eventType="touchUpInside" id="lVJ-NM-y8h"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.18198148906230927" green="0.69426733255386353" blue="0.53024792671203613" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="0hY-a0-4Za" secondAttribute="trailing" constant="20" id="G4q-g3-XzF"/>
-                                    <constraint firstItem="0hY-a0-4Za" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="G4T-RS-Flw" secondAttribute="trailing" constant="10" id="Jp9-g0-SW6"/>
-                                    <constraint firstAttribute="height" constant="100" id="M6H-Zu-tvX"/>
-                                    <constraint firstItem="G4T-RS-Flw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AIg-Ki-LOY" secondAttribute="trailing" constant="10" id="Tbo-hI-Zqj"/>
-                                    <constraint firstItem="0hY-a0-4Za" firstAttribute="centerY" secondItem="G4T-RS-Flw" secondAttribute="centerY" id="W7D-2N-Dkd"/>
-                                    <constraint firstAttribute="bottom" secondItem="G4T-RS-Flw" secondAttribute="bottom" constant="5" id="WnC-ZK-gBJ"/>
-                                    <constraint firstItem="AIg-Ki-LOY" firstAttribute="leading" secondItem="7Z1-xg-dpE" secondAttribute="leading" constant="20" id="kos-3C-h34"/>
-                                    <constraint firstItem="G4T-RS-Flw" firstAttribute="centerX" secondItem="7Z1-xg-dpE" secondAttribute="centerX" id="yjY-by-Pud"/>
-                                    <constraint firstItem="G4T-RS-Flw" firstAttribute="centerY" secondItem="AIg-Ki-LOY" secondAttribute="centerY" id="yoV-EN-UhE"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xxg-hR-aHh" userLabel="First Row">
                                 <rect key="frame" x="0.0" y="100" width="414" height="100"/>
                                 <subviews>
@@ -342,6 +294,54 @@
                                     <constraint firstItem="eTk-Kb-hjU" firstAttribute="leading" secondItem="DCy-UK-Vmx" secondAttribute="leading" constant="15" id="ejr-2j-Jqo"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Z1-xg-dpE" userLabel="Title Container">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VetApp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4T-RS-Flw">
+                                        <rect key="frame" x="142" y="35" width="130" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="SZc-gP-zLC"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="FredokaOne-Regular" family="Fredoka One" pointSize="40"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AIg-Ki-LOY">
+                                        <rect key="frame" x="20" y="29.666666666666671" width="44" height="71"/>
+                                        <fontDescription key="fontDescription" name="Fredokadingbats" family="Fredoka dingbats" pointSize="50"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="M">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backPressed:" destination="lQO-kc-O5s" eventType="touchUpInside" id="SQS-E9-vha"/>
+                                            <segue destination="9j6-ge-w7w" kind="unwind" unwindAction="backToPetViewController:" id="aG8-vi-FXU"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0hY-a0-4Za">
+                                        <rect key="frame" x="353" y="46" width="41" height="38"/>
+                                        <fontDescription key="fontDescription" name="FredokaOne-Regular" family="Fredoka One" pointSize="22"/>
+                                        <state key="normal" title="Add">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="finishButtonPressed:" destination="lQO-kc-O5s" eventType="touchUpInside" id="lVJ-NM-y8h"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.18198148906230927" green="0.69426733255386353" blue="0.53024792671203613" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="0hY-a0-4Za" secondAttribute="trailing" constant="20" id="G4q-g3-XzF"/>
+                                    <constraint firstItem="0hY-a0-4Za" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="G4T-RS-Flw" secondAttribute="trailing" constant="10" id="Jp9-g0-SW6"/>
+                                    <constraint firstAttribute="height" constant="100" id="M6H-Zu-tvX"/>
+                                    <constraint firstItem="G4T-RS-Flw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AIg-Ki-LOY" secondAttribute="trailing" constant="10" id="Tbo-hI-Zqj"/>
+                                    <constraint firstItem="0hY-a0-4Za" firstAttribute="centerY" secondItem="G4T-RS-Flw" secondAttribute="centerY" id="W7D-2N-Dkd"/>
+                                    <constraint firstAttribute="bottom" secondItem="G4T-RS-Flw" secondAttribute="bottom" constant="5" id="WnC-ZK-gBJ"/>
+                                    <constraint firstItem="AIg-Ki-LOY" firstAttribute="leading" secondItem="7Z1-xg-dpE" secondAttribute="leading" constant="20" id="kos-3C-h34"/>
+                                    <constraint firstItem="G4T-RS-Flw" firstAttribute="centerX" secondItem="7Z1-xg-dpE" secondAttribute="centerX" id="yjY-by-Pud"/>
+                                    <constraint firstItem="G4T-RS-Flw" firstAttribute="centerY" secondItem="AIg-Ki-LOY" secondAttribute="centerY" id="yoV-EN-UhE"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -409,7 +409,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VetApp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRQ-cX-o7F">
-                                        <rect key="frame" x="142" y="35" width="130" height="60"/>
+                                        <rect key="frame" x="134.66666666666666" y="35" width="144.99999999999997" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="cU4-lX-vF4"/>
                                         </constraints>
@@ -417,11 +417,28 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O1W-Tt-JjD">
+                                        <rect key="frame" x="364" y="40" width="30" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Ifs-uV-d1g"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="FredokaOne-Regular" family="Fredoka One" pointSize="50"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="-9" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="+">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addPetPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="RUV-hc-gMS"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.18198148906230927" green="0.69426733255386353" blue="0.53024792671203613" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="7j6-LX-F3M"/>
                                     <constraint firstItem="wRQ-cX-o7F" firstAttribute="centerX" secondItem="46u-1e-yRr" secondAttribute="centerX" id="8Ju-l6-KG1"/>
+                                    <constraint firstAttribute="trailing" secondItem="O1W-Tt-JjD" secondAttribute="trailing" constant="20" id="EAH-Jc-aEh"/>
+                                    <constraint firstItem="O1W-Tt-JjD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wRQ-cX-o7F" secondAttribute="trailing" constant="10" id="GK6-rX-eGr"/>
+                                    <constraint firstItem="O1W-Tt-JjD" firstAttribute="centerY" secondItem="wRQ-cX-o7F" secondAttribute="centerY" id="hn9-nf-OF6"/>
                                     <constraint firstAttribute="bottom" secondItem="wRQ-cX-o7F" secondAttribute="bottom" constant="5" id="wUr-Mn-lqV"/>
                                 </constraints>
                             </view>
@@ -452,7 +469,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="777" y="-373"/>
+            <point key="canvasLocation" x="776.81159420289862" y="-373.66071428571428"/>
         </scene>
         <!--Vet-->
         <scene sceneID="fI8-KS-ek9">
@@ -466,7 +483,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="VetApp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZoI-9r-1Z5">
-                                        <rect key="frame" x="142" y="35" width="130" height="60"/>
+                                        <rect key="frame" x="134.66666666666666" y="35" width="144.99999999999997" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="FDO-LQ-s4H"/>
                                         </constraints>
@@ -525,7 +542,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VetApp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5g-xy-fL4">
-                                        <rect key="frame" x="142" y="35" width="130" height="60"/>
+                                        <rect key="frame" x="134.66666666666666" y="35" width="144.99999999999997" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="5v2-Cx-iuE"/>
                                         </constraints>
@@ -630,7 +647,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="confirmPressed:" destination="9ah-WE-zeT" eventType="touchUpInside" id="37E-pp-ysU"/>
+                                            <action selector="continuePressed:" destination="9ah-WE-zeT" eventType="touchUpInside" id="37E-pp-ysU"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xs1-NK-731" userLabel="ShowHide Password Button">
@@ -843,7 +860,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="VetApp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XwQ-Pb-lKx">
-                                        <rect key="frame" x="142" y="35" width="130" height="60"/>
+                                        <rect key="frame" x="134.66666666666666" y="35" width="144.99999999999997" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="iwN-OV-FsC"/>
                                         </constraints>
@@ -901,7 +918,7 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="INu-6C-3Yv" userLabel="backButton">
-                                        <rect key="frame" x="20" y="5" width="44" height="71"/>
+                                        <rect key="frame" x="20" y="5" width="36" height="62"/>
                                         <fontDescription key="fontDescription" name="Fredokadingbats" family="Fredoka dingbats" pointSize="50"/>
                                         <state key="normal" title="M">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

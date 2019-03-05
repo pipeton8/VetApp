@@ -11,8 +11,8 @@ import Firebase
 import FBSDKLoginKit
 
 protocol AuthenticationManagerDelegate {
-    func UserDidSignIn()
-    func ShowAlert(vc : UIViewController?, popup : UIAlertController?)
+    func UserDidAuthenticate()
+    func ShowAlert(vc : UIViewController)
     func DismissAlertsVC()
 }
 
@@ -20,6 +20,10 @@ class AuthenticationManager : UIViewController, UIPopoverPresentationControllerD
     
     // Delegation
     var delegate : AuthenticationManagerDelegate?
+    
+    // Email and password
+    var email = ""
+    var password = ""
     
     // Password constants and vars
     let NUMBER_OF_PASSWORD_SHAKES : Float = 3
@@ -32,6 +36,21 @@ class AuthenticationManager : UIViewController, UIPopoverPresentationControllerD
     let RED_ALERT_IDENTIFIER : String = "RedAlertPop"
     let RED_ALERT_ARROW_OFFSET : CGAffineTransform = CGAffineTransform(translationX: 0, y: -2)
     var emailTextField : UITextField = UITextField()
+    
+    // Sign In Methods identifiers
+    let EMAILPASSWORD_SIGNIN_IDENTIFIER : String = "password"
+    let FACEBOOK_SIGNIN_IDENTIFIER : String = "facebook.com"
+    
+    ////////////////////////////////////////////////////
+    //MARK: - Register
+    func RegisterWith(_ email : String, _ password : String) {
+        self.email = email
+        self.password = password
+        Auth.auth().createUser(withEmail: email, password: password) { (_, error) in
+            if error == nil { self.delegate?.UserDidAuthenticate() }
+            else { self.AlertErrorInAuth(withCode : AuthErrorCode(rawValue: error!._code)!) }
+        }
+    }
 
     ////////////////////////////////////////////////////
     //MARK: - Re-signin
@@ -45,9 +64,11 @@ class AuthenticationManager : UIViewController, UIPopoverPresentationControllerD
     ////////////////////////////////////////////////////
     //MARK: - Authentication with email
     func AuthenticateWith(_ email : String, _ password : String) {
+        self.email = email
+        self.password = password
         Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
-            if error == nil { self.delegate?.UserDidSignIn() }
-            else { self.AlertErrorInAuth(withCode: AuthErrorCode(rawValue: error!._code)!) }
+            if error == nil { self.delegate?.UserDidAuthenticate() }
+            else { self.CheckError(AuthErrorCode(rawValue: error!._code)!) }
         }
     }
     
@@ -64,7 +85,7 @@ class AuthenticationManager : UIViewController, UIPopoverPresentationControllerD
     
     func AuthenticateUsingFacebook(with credential : AuthCredential, shouldShowError : Bool = true) {
         Auth.auth().signInAndRetrieveData(with: credential) { (_, error) in
-            if error == nil { self.delegate?.UserDidSignIn() }
+            if error == nil { self.delegate?.UserDidAuthenticate() }
             else if shouldShowError { self.AlertErrorInAuth(withCode: AuthErrorCode(rawValue: error!._code)!) }
         }
     }
@@ -81,18 +102,39 @@ class AuthenticationManager : UIViewController, UIPopoverPresentationControllerD
             ShowAlert(withText: "This account has been disabled")
         case .userNotFound:
             ShowAlert(withText: "This e-mail is not registered")
+        case .emailAlreadyInUse:
+            ShowAlert(withText: "The e-mail is already in use")
         case .invalidCredential:
             ShowPopup(withTitle: "Facebook Authentication Problem", withText: "Invalid credentials")
         case .accountExistsWithDifferentCredential:
-            ShowPopup(withTitle: "Linking required", withText: "This account already exists. To link Facebok with your account log in with the original credentials and go to Settings")
+            ShowPopup(withTitle: "Linking required", withText: "This account already exists with another provider. To link your account with your e-mail log in with the original credentials and go to Settings")
         case .wrongPassword:
-            ShowWrongPasswordAlert()
+            ShowPasswordAlert()
+        case .weakPassword:
+            ShowPasswordAlert()
         default:
             break
         }
     }
     
-    func ShowWrongPasswordAlert() {
+    func CheckError(_ error : AuthErrorCode) {
+        Auth.auth().fetchProviders(forEmail: email) { (providers, error) in
+            var anotherProvider = false
+            if error == nil {
+                if let _ = providers {
+                    let emailIndex = providers!.firstIndex(of: self.EMAILPASSWORD_SIGNIN_IDENTIFIER)
+                    if emailIndex == nil { anotherProvider = true }
+                    else if providers!.count > 1 { anotherProvider = true}
+                    else if let index = emailIndex, index > 0 { anotherProvider = true }
+                }
+            }
+            if anotherProvider { self.AlertErrorInAuth(withCode: .accountExistsWithDifferentCredential) }
+            else { self.AlertErrorInAuth(withCode: AuthErrorCode(rawValue: error!._code)!) }
+        }
+        
+    }
+    
+    func ShowPasswordAlert() {
         passwordLabel.textColor = UIColor.flatRed()
         passwordLabel.shake(times: NUMBER_OF_PASSWORD_SHAKES, duration: PASSWORD_SHAKE_ANIM_TIME, displacement: PASSWORD_SHAKE_HORIZONTAL_MOVEMENT)
     }
@@ -100,7 +142,7 @@ class AuthenticationManager : UIViewController, UIPopoverPresentationControllerD
     func ShowPopup(withTitle title : String? = nil, withText text : String, actionTitle : String = "Dismiss") {
         let alert = UIAlertController(title: title, message: text, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: nil))
-        delegate?.ShowAlert(vc: nil, popup: alert)
+        delegate?.ShowAlert(vc: alert)
     }
     
     func FacebookSignInErrorHandling(_ result : FBSDKLoginManagerLoginResult?, _ error : Error?) -> Bool {
@@ -115,7 +157,7 @@ class AuthenticationManager : UIViewController, UIPopoverPresentationControllerD
     func ShowAlert(withText text : String) {
         let alertVC = SetupAndInstantiateAlert(withText: text)
         ConfigureAppearanceOf(alertVC.popoverPresentationController!)
-        delegate?.ShowAlert(vc: alertVC, popup: nil)
+        delegate?.ShowAlert(vc: alertVC)
     }
     
     func SetupAndInstantiateAlert(withText text : String) -> RedAlertPop {
@@ -151,6 +193,4 @@ class AuthenticationManager : UIViewController, UIPopoverPresentationControllerD
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .none
     }
-    
-
 }

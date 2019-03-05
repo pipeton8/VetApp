@@ -25,13 +25,15 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     let PET_ROW_HEIGHT : CGFloat = 90.0
     let ADDNEWPET_ROW_HEIGHT : CGFloat = 60.0
     var petArray : [Pet] = [Pet]()
-    var numberOfPets : Int = 0
 
     // Segue Consts and Variables
     let ADDPET_SEGUE_ID = "goToAddPet"
     let EDITPET_SEGUE_ID = "goToEditPet"
     var petToEdit : Pet?
     var petToEditImage : UIImage?
+    
+    // Pet Database
+    var petDB : CollectionReference?
     
     // Outlets
     @IBOutlet weak var petTableView: UITableView!
@@ -42,45 +44,38 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         ConformToProtocols()
+        GetPetDatabase()
         RetrievePets(showHUD: true)
         ConfigureCells()
         
         petTableView.addSubview(self.refreshControl)
     }
     
-    fileprivate func ConformToProtocols() {
+    func ConformToProtocols() {
         petTableView.delegate = self
         petTableView.dataSource = self
     }
 
-    fileprivate func ConfigureCells() {
-        petTableView.register(UINib(nibName: ADDPET_CELL_XIB, bundle : nil), forCellReuseIdentifier: ADDPET_CELL_ID)
+    func ConfigureCells() {
+//        petTableView.register(UINib(nibName: ADDPET_CELL_XIB, bundle : nil), forCellReuseIdentifier: ADDPET_CELL_ID)
         petTableView.register(UINib(nibName: PET_CELL_XIB, bundle : nil), forCellReuseIdentifier: PET_CELL_ID)
+    }
+    
+    func GetPetDatabase() {
+        petDB = Firestore.firestore().collection(PET_DATABASE_ID)
     }
     
     //////////////////////////////////////////////////////////////
     
-    // MARK: - TableView Methods
-    func loadImage(from pet: Pet) -> UIImage? {
-        if pet.imagePath == "" { return nil }
-        
-        let imageUrl : URL = URL(fileURLWithPath: pet.imagePath)
-        
-        if FileManager.default.fileExists(atPath: pet.imagePath),
-            let imageData: Data = try? Data(contentsOf: imageUrl),
-            let image: UIImage = UIImage(data: imageData, scale: UIScreen.main.scale) {
-            return image
-        }
-        return nil
-    }
-    
+    // MARK: - TableView Delegate Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return petArray.count + 1 // the extra element is the addPet button
+        return petArray.count //+ 1 // the extra element is the addPet button
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row < numberOfPets {
+        if indexPath.row < petArray.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: PET_CELL_ID, for: indexPath) as! PetCell
             let petToShow : Pet = petArray[indexPath.row]
             let petImage : UIImage? = loadImage(from: petToShow)
@@ -95,7 +90,7 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row < numberOfPets {
+        if indexPath.row < petArray.count {
             petToEdit = petArray[indexPath.row]
             petToEditImage = (tableView.cellForRow(at: indexPath) as! PetCell).petPicture.image
             performSegue(withIdentifier: EDITPET_SEGUE_ID, sender: self)
@@ -107,8 +102,36 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row < numberOfPets { return PET_ROW_HEIGHT }
+        if indexPath.row < petArray.count { return PET_ROW_HEIGHT }
         else { return ADDNEWPET_ROW_HEIGHT}
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCell.EditingStyle.delete) {
+            let petToDelete = petArray.remove(at: indexPath.row)
+            DeletePet(petToDelete)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
+    //////////////////////////////////////////////////////////////
+    // MARK: - Image Handling
+    
+    func loadImage(from pet: Pet) -> UIImage? {
+        let imageUrl : URL = URL(fileURLWithPath: pet.imagePath)
+        
+        if FileManager.default.fileExists(atPath: pet.imagePath),
+            let imageData: Data = try? Data(contentsOf: imageUrl),
+            let image: UIImage = UIImage(data: imageData, scale: UIScreen.main.scale) {
+            return image
+        } else {
+            return UIImage(named: pet.species.rawValue)
+        }
+        
     }
     
     //////////////////////////////////////////////////////////////
@@ -126,7 +149,6 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         RetrievePets()
         refreshControl.endRefreshing()
-        self.petTableView.reloadData()
     }
     
     //////////////////////////////////////////////////////////////
@@ -134,10 +156,9 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     // MARK: - Networking
     fileprivate func RetrievePets(showHUD : Bool = false) {
         if showHUD { SVProgressHUD.show() }
-        let petDB = Firestore.firestore().collection(PET_DATABASE_ID)
         var newPetArray = [Pet]()
         
-        petDB.getDocuments {
+        petDB!.getDocuments {
             (snapshot, error) in
             if let error = error {
                 print("There was an error getting the documents : \(error)")
@@ -147,22 +168,30 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                     let petData = document.data()
                     newPetArray.append(Pet(dictionary: petData, id: document.reference.documentID))
                 }
-                self.petArray = newPetArray
-                self.numberOfPets = newPetArray.count
-                self.petTableView.reloadData()
+                self.ReloadTableView(with : newPetArray)
                 SVProgressHUD.dismiss()
             }
         }
+    }
+    
+    func ReloadTableView(with newPetArray : [Pet]) {
+        petArray = [Pet]()
+        petTableView.reloadData()
+        petArray = newPetArray
+        petTableView.reloadSections(IndexSet(integer: 0), with: .bottom)
     }
     
     fileprivate func UploadPet(_ petToAdd : Pet) {
         let petData = petToAdd.PrepareToUpload()
         
         SVProgressHUD.show()
-        let petDB = Firestore.firestore().collection(PET_DATABASE_ID)
-        let petDocReference = petDB.document(petToAdd.ID)
+        let petDocReference = petDB!.document(petToAdd.ID)
         petDocReference.setData(petData)
         SVProgressHUD.dismiss()
+    }
+    
+    func DeletePet(_ petToDelete : Pet) {
+        petDB!.document(petToDelete.ID).delete()
     }
     
     //////////////////////////////////////////////////////////////
@@ -179,12 +208,15 @@ class PetViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     
+    @IBAction func addPetPressed(_ sender: Any) {
+        performSegue(withIdentifier: ADDPET_SEGUE_ID, sender: self)
+    }
+    
     //////////////////////////////////////////////////////////////
     
-    // MARK: - AddPet and EditPet methods
+    // MARK: - ConfigPetDelegate methods
     func PetAdded(newPet: Pet) {
         petArray.append(newPet)
-        numberOfPets += 1
         UploadPet(newPet)
         petTableView.reloadData()
     }

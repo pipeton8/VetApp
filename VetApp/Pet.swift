@@ -21,7 +21,7 @@ class Pet {
         if let name = dictionary["name"] as? String { self.name = name }
         if let speciesStr = dictionary["species"] as? String, let species = Species(rawValue: speciesStr) { self.species = species }
         if let race = dictionary["race"] as? String { self.race = race }
-        if let dateOfBirth = dictionary["dateOfBirt"] as? Int { self.dateOfBirth = dateOfBirth }
+        if let dateOfBirth = dictionary["dateOfBirth"] as? Int { self.dateOfBirth = dateOfBirth }
         if let chipNumber = dictionary["chipNumber"] as? Int { self.chipNumber = chipNumber}
         if let imagePath = dictionary["imagePath"] as? String { self.imagePath = imagePath }
         if let ID = id { self.ID = ID }

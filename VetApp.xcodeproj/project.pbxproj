@@ -160,19 +160,19 @@
 				B603522D2219A1690070583B /* LaunchScreen.storyboard */,
 				B60352282219A1680070583B /* Main.storyboard */,
 				B62C4F5222237EF800B98C82 /* Pet Cell */,
-				B62C4F4D22237E9D00B98C82 /* AddPet Cell */,
+				B62C4F4D22237E9D00B98C82 /* AddPet Cell (DEPRECATED) */,
 				B66BB0D7222C53A000E65473 /* Red Alert PopView */,
 			);
 			name = View;
 			sourceTree = "<group>";
 		};
-		B62C4F4D22237E9D00B98C82 /* AddPet Cell */ = {
+		B62C4F4D22237E9D00B98C82 /* AddPet Cell (DEPRECATED) */ = {
 			isa = PBXGroup;
 			children = (
 				B62C4F5322237F1500B98C82 /* AddPetCell.swift */,
 				B62C4F5422237F1500B98C82 /* AddPetCell.xib */,
 			);
-			name = "AddPet Cell";
+			name = "AddPet Cell (DEPRECATED)";
 			sourceTree = "<group>";
 		};
 		B62C4F5222237EF800B98C82 /* Pet Cell */ = {

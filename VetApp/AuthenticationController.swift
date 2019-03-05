@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FBSDKLoginKit
 
-class AuthenticationViewController: UIViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, UIGestureRecognizerDelegate, AuthenticationManagerDelegate {
+class AuthenticationViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, AuthenticationManagerDelegate {
 
     // MARK: - Properties
     
@@ -189,7 +189,7 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate, UIPop
 
     ////////////////////////////////////////////////////
     // MARK: - Authenticate Methods
-    @IBAction func confirmPressed(_ sender: Any) {
+    @IBAction func continuePressed(_ sender: Any) {
         let email = emailTextField.text!
         let password = passwordTextField.text!
         authManager.CleanAlerts(passwordErrorCode: .wrongPassword)
@@ -239,13 +239,12 @@ class AuthenticationViewController: UIViewController, UITextFieldDelegate, UIPop
     
     ////////////////////////////////////////////////////
     // MARK: - Auth Manager Delegate Methods
-    func UserDidSignIn() {
+    func UserDidAuthenticate() {
         performSegue(withIdentifier: MAINAPP_SEGUE_IDENTIFIER, sender: self)
     }
     
-    func ShowAlert(vc: UIViewController?, popup: UIAlertController?) {
-        if let _ = vc { present(vc!, animated: true, completion: nil) }
-        if let _ = popup { present(popup!, animated: true, completion: nil) }
+    func ShowAlert(vc: UIViewController) {
+        present(vc, animated: true, completion: nil)
     }
     
     func DismissAlertsVC() {
